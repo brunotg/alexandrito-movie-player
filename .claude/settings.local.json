@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ffmpeg -version)",
+      "Bash(python3 *)",
+      "Bash(pip3 install *)",
+      "Bash(curl -s http://localhost:5000/api/videos)",
+      "Bash(curl -sv http://localhost:5000/api/videos)",
+      "Bash(pkill -f \"python3 server.py\")",
+      "Bash(curl -s http://localhost:8080/api/videos)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/)",
+      "Bash(pkill -f \"server.py\")",
+      "Bash(yt-dlp --version)",
+      "Bash(ipconfig getifaddr *)",
+      "Bash(scutil --get LocalHostName)",
+      "Bash(scutil --get ComputerName)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/background.png)"
+    ]
+  }
+}
