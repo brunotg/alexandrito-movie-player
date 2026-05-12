@@ -85,6 +85,7 @@ HTML = """<!DOCTYPE html>
       gap: 22px;
     }
     .card {
+      position: relative;
       background: #0d2240;
       border-radius: 12px;
       overflow: hidden;
@@ -120,6 +121,20 @@ HTML = """<!DOCTYPE html>
       white-space: nowrap;
       flex-shrink: 0;
     }
+    .card-progress { height: 4px; background: #1a3a5c; }
+    .card-progress-fill { height: 100%; background: #1a94e8; }
+    .card-remaining { font-size: 0.75rem; color: #4a8fb8; padding: 2px 14px 10px; }
+    .card-watched-badge {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: rgba(0,0,0,0.55);
+      color: #4cdf80;
+      font-size: 1.1rem;
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-watched-label { font-size: 0.75rem; color: #4cdf80; padding: 2px 14px 10px; }
 
     /* ── Slideshow ────────────────────────────────────── */
     #slideshow {
@@ -198,6 +213,7 @@ HTML = """<!DOCTYPE html>
       font-size: 0.85rem;
       letter-spacing: 1px;
     }
+    .slide-play-row { display: flex; gap: 12px; }
     #play-btn {
       background: #1278c4;
       border: none;
@@ -210,6 +226,17 @@ HTML = """<!DOCTYPE html>
       transition: background 0.15s;
     }
     #play-btn:hover { background: #1a94e8; }
+    #btn-restart {
+      background: #1a4a6e;
+      border: none;
+      color: #a0d8f0;
+      padding: 13px 28px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #btn-restart:hover { background: #255f8a; }
 
     /* ── Video player ─────────────────────────────────── */
     #player {
@@ -251,7 +278,7 @@ HTML = """<!DOCTYPE html>
   </div>
   <div class="slide-footer">
     <div id="slide-counter"></div>
-    <button id="play-btn" onclick="startPlayer()">&#9654;&nbsp; Play</button>
+    <div class="slide-play-row"></div>
   </div>
 </div>
 
@@ -286,6 +313,15 @@ HTML = """<!DOCTYPE html>
     show('library', 'grid');
   }
 
+  // ── localStorage helpers ─────────────────────────────
+  function progressKey(v)     { return 'progress:' + v.source; }
+  function watchedKey(v)      { return 'watched:'  + v.source; }
+  function saveProgress(v, t) { localStorage.setItem(progressKey(v), t); }
+  function loadProgress(v)    { return parseFloat(localStorage.getItem(progressKey(v))) || 0; }
+  function clearProgress(v)   { localStorage.removeItem(progressKey(v)); }
+  function markWatched(v)     { localStorage.setItem(watchedKey(v), '1'); }
+  function isWatched(v)       { return !!localStorage.getItem(watchedKey(v)); }
+
   // ── library ──────────────────────────────────────────
   function fmtDuration(secs) {
     const h = Math.floor(secs / 3600);
@@ -297,24 +333,63 @@ HTML = """<!DOCTYPE html>
   }
 
   function renderLibrary() {
-    document.getElementById('library').innerHTML = videos.map((v, i) => `
-      <div class="card" onclick="openSlideshow(${i})">
-        <img src="/media?path=${encodeURIComponent(v.stills[0])}"
-             alt="${escHtml(v.title)}" loading="lazy">
-        <div class="card-body">
-          <div class="card-title">${escHtml(v.title)}</div>
-          <div class="card-duration">${v.duration ? fmtDuration(v.duration) : ''}</div>
+    document.getElementById('library').innerHTML = videos.map((v, i) => {
+      const watched   = isWatched(v);
+      const saved     = loadProgress(v);
+      const pct       = v.duration && saved ? Math.min(100, (saved / v.duration) * 100) : 0;
+      const remaining = v.duration && saved ? v.duration - saved : null;
+
+      const progressBar = !watched && saved > 5
+        ? `<div class="card-progress"><div class="card-progress-fill" style="width:${pct}%"></div></div>`
+        : '<div class="card-progress"></div>';
+
+      const badge  = watched ? `<div class="card-watched-badge">&#10003;</div>` : '';
+      const footer = watched
+        ? `<div class="card-watched-label">&#10003; Watched</div>`
+        : remaining && remaining > 10
+          ? `<div class="card-remaining">${fmtDuration(remaining)} remaining</div>`
+          : '';
+
+      return `
+        <div class="card" onclick="openSlideshow(${i})">
+          ${badge}
+          <img src="/media?path=${encodeURIComponent(v.stills[0])}"
+               alt="${escHtml(v.title)}" loading="lazy">
+          ${progressBar}
+          <div class="card-body">
+            <div class="card-title">${escHtml(v.title)}</div>
+            <div class="card-duration">${v.duration ? fmtDuration(v.duration) : ''}</div>
+          </div>
+          ${footer}
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   // ── slideshow ─────────────────────────────────────────
+  function renderPlayButtons() {
+    const saved   = loadProgress(currentVideo);
+    const watched = isWatched(currentVideo);
+    const row     = document.querySelector('.slide-play-row');
+    if (watched || saved > 5) {
+      const label = watched
+        ? '&#9654;&nbsp; Play again'
+        : `&#9654;&nbsp; Resume &mdash; ${fmtDuration(saved)} in`;
+      row.innerHTML = `
+        <button id="play-btn" onclick="startPlayer(false)">${label}</button>
+        <button id="btn-restart" onclick="startPlayer(true)">&#8635; Start over</button>
+      `;
+    } else {
+      row.innerHTML = `<button id="play-btn" onclick="startPlayer(false)">&#9654;&nbsp; Play</button>`;
+    }
+  }
+
   function openSlideshow(i) {
     currentVideo = videos[i];
     slideIndex = 0;
     document.getElementById('slideshow-title').textContent = currentVideo.title;
     setSlide(null);
+    renderPlayButtons();
     hide('library');
     show('slideshow', 'flex');
     show('back-btn');
@@ -354,13 +429,35 @@ HTML = """<!DOCTYPE html>
   });
 
   // ── player ───────────────────────────────────────────
-  function startPlayer() {
+  function startPlayer(fromBeginning = false) {
     const v = currentVideo;
     document.getElementById('player-title').textContent = v.title;
     const vid = document.getElementById('video-el');
     vid.src = `/media?path=${encodeURIComponent(v.source)}`;
     vid.load();
-    vid.play();
+
+    vid.addEventListener('loadedmetadata', () => {
+      if (!fromBeginning) {
+        const saved = loadProgress(v);
+        if (saved > 5) vid.currentTime = saved;
+      }
+      vid.play();
+    }, { once: true });
+
+    let lastSave = 0;
+    vid.addEventListener('timeupdate', () => {
+      if (vid.currentTime - lastSave >= 5) {
+        saveProgress(v, vid.currentTime);
+        lastSave = vid.currentTime;
+      }
+    });
+
+    vid.addEventListener('ended', () => {
+      clearProgress(v);
+      markWatched(v);
+      renderLibrary();
+    });
+
     hide('slideshow');
     show('player');
     view = 'player';
@@ -373,10 +470,12 @@ HTML = """<!DOCTYPE html>
       vid.pause();
       vid.src = '';
       hide('player');
+      renderPlayButtons();
       show('slideshow', 'flex');
       view = 'slideshow';
     } else if (view === 'slideshow') {
       hide('slideshow');
+      renderLibrary();
       show('library', 'grid');
       hide('back-btn');
       view = 'library';
