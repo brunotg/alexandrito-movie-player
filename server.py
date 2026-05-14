@@ -237,6 +237,17 @@ HTML = """<!DOCTYPE html>
       transition: background 0.15s;
     }
     #btn-restart:hover { background: #255f8a; }
+    #btn-unwatch {
+      background: #2a1a1a;
+      border: 1px solid #6e2a2a;
+      color: #e08080;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #btn-unwatch:hover { background: #3d1f1f; }
 
     /* ── Video player ─────────────────────────────────── */
     #player {
@@ -247,7 +258,8 @@ HTML = """<!DOCTYPE html>
     }
     #player-title {
       font-size: 1.15rem;
-      color: #5bc8f5;
+      color: #ffffff;
+      font-weight: bold;
       margin-bottom: 14px;
       letter-spacing: 1px;
     }
@@ -320,6 +332,7 @@ HTML = """<!DOCTYPE html>
   function loadProgress(v)    { return parseFloat(localStorage.getItem(progressKey(v))) || 0; }
   function clearProgress(v)   { localStorage.removeItem(progressKey(v)); }
   function markWatched(v)     { localStorage.setItem(watchedKey(v), '1'); }
+  function clearWatched(v)    { localStorage.removeItem(watchedKey(v)); }
   function isWatched(v)       { return !!localStorage.getItem(watchedKey(v)); }
 
   // ── library ──────────────────────────────────────────
@@ -375,13 +388,22 @@ HTML = """<!DOCTYPE html>
       const label = watched
         ? '&#9654;&nbsp; Play again'
         : `&#9654;&nbsp; Resume &mdash; ${fmtDuration(saved)} in`;
+      const unwatchedBtn = watched
+        ? `<button id="btn-unwatch" onclick="unmarkWatched()">&#10007; Mark as unwatched</button>`
+        : '';
       row.innerHTML = `
         <button id="play-btn" onclick="startPlayer(false)">${label}</button>
         <button id="btn-restart" onclick="startPlayer(true)">&#8635; Start over</button>
+        ${unwatchedBtn}
       `;
     } else {
       row.innerHTML = `<button id="play-btn" onclick="startPlayer(false)">&#9654;&nbsp; Play</button>`;
     }
+  }
+
+  function unmarkWatched() {
+    clearWatched(currentVideo);
+    renderPlayButtons();
   }
 
   function openSlideshow(i) {
