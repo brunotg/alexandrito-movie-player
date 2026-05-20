@@ -29,11 +29,40 @@ def get_duration(video_path: Path) -> float:
         sys.exit(1)
 
 
-def parse_title(filename: str) -> str:
-    """Extract title from filenames like 'Octonauts - <title> | ...' or 'Octonauts & <title>'"""
+def _season_from_dir(directory: Path) -> str:
+    m = re.search(r'[Ss]0?(\d+)$', directory.name)
+    return f"Season {int(m.group(1))}" if m else ""
+
+
+def _show_from_dir(directory: Path) -> str:
+    parts = str(directory).lower()
+    if "above-and-beyond" in parts or "above_and_beyond" in parts:
+        return "Above & Beyond"
+    return "Octonauts"
+
+
+def parse_episode(filename: str, directory: Path = None) -> tuple[str, str, str]:
+    """Return (show, season, title) parsed from a video filename."""
     stem = Path(filename).stem
-    match = re.search(r'Octonauts\s+[-&]\s+([^|]+)', stem)
-    return match.group(1).strip() if match else stem
+    # "Above & Beyond S03_01. Pininga Turtle"
+    m = re.match(r'(Above & Beyond)\s+S(\d+)_\d+\.\s*(.+)', stem)
+    if m:
+        return m.group(1), f"Season {int(m.group(2))}", m.group(3).strip()
+    # "Octonauts - Title | ..." or "Octonauts & Title"
+    m = re.search(r'Octonauts\s+[-&]\s+([^|]+)', stem)
+    if m:
+        season = _season_from_dir(directory) if directory else ""
+        return "Octonauts", season, m.group(1).strip()
+    # "01. Solar Storm" — bare episode files, derive show/season from directory
+    m = re.match(r'\d+\.\s*(.+)', stem)
+    if m and directory:
+        return _show_from_dir(directory), _season_from_dir(directory), m.group(1).strip()
+    return "", "", stem
+
+
+def parse_title(filename: str) -> str:
+    _, _, title = parse_episode(filename)
+    return title
 
 
 def extract_frame(video_path: Path, output_path: Path, timestamp: float) -> None:
@@ -122,7 +151,7 @@ def main() -> None:
         print(f"Error: file not found: {args.video}", file=sys.stderr)
         sys.exit(1)
 
-    title = parse_title(args.video.name)
+    show, season, title = parse_episode(args.video.name, args.video.parent)
     output_dir = args.output or args.video.parent / f"{args.video.stem}_stills"
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -142,9 +171,10 @@ def main() -> None:
 
     metadata = {
         "title": title,
+        "show": show,
+        "season": season,
         "source": str(args.video.resolve()),
         "duration": duration,
-        "stills": still_paths,
     }
     json_path = output_dir / "metadata.json"
     json_path.write_text(json.dumps(metadata, indent=2))

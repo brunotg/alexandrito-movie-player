@@ -3,30 +3,263 @@
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from flask import Flask, abort, jsonify, render_template_string, request, send_file
 
 app = Flask(__name__)
 VIDEO_DIR: Path = None
+ABOVE_BEYOND_S03_DIR: Path = None
+ABOVE_BEYOND_S04_DIR: Path = None
 
 
-def load_all_metadata() -> list[dict]:
-    results = []
-    for metadata_path in sorted(VIDEO_DIR.glob("*_stills/metadata.json")):
+def _parse_title(stem: str) -> str:
+    """Extract a human-readable title from a video filename stem."""
+    # "Above & Beyond S03_01. Pininga Turtle" → "Pininga Turtle"
+    m = re.search(r'S\d+_\d+\.\s*(.+)', stem)
+    if m:
+        return m.group(1).strip()
+    # "Octonauts - Title | ..." or "Octonauts & Title"
+    m = re.search(r'Octonauts\s+[-&]\s+([^|]+)', stem)
+    if m:
+        return m.group(1).strip()
+    return stem
+
+
+def load_all_metadata(directory: Path) -> list[dict]:
+    has_metadata: dict[Path, dict] = {}
+    for metadata_path in sorted(directory.glob("*_stills/metadata.json")):
         data = json.loads(metadata_path.read_text())
-        grids = sorted(metadata_path.parent.glob("grid_*.jpg"))
-        data["grids"] = [str(g) for g in grids]
-        results.append(data)
+        has_metadata[Path(data["source"]).name] = data
+
+    results = []
+    for video in sorted(p for ext in ("*.mp4", "*.mkv") for p in directory.glob(ext)):
+        if video.name in has_metadata:
+            results.append(has_metadata[video.name])
+        else:
+            results.append({
+                "title": _parse_title(video.stem),
+                "source": str(video),
+                "grids": [],
+            })
     return results
 
+
+ABOVE_BEYOND_PICKER_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Above &amp; Beyond &mdash; Seasons</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #8aafc5 url('/background.png') center center / cover fixed;
+      color: #e0f4ff;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #0b1e36;
+      border-bottom: 2px solid #1a4a6e;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      color: #5bc8f5;
+      flex: 1;
+      text-align: center;
+    }
+    .home-link {
+      background: #1a4a6e;
+      color: #a0d8f0;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .home-link:hover { background: #255f8a; }
+
+    .picker {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 60px 28px;
+      flex-wrap: wrap;
+    }
+
+    .series-card {
+      width: 360px;
+      background: #0d2240;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid #1a3a5c;
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: block;
+    }
+    .series-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 140, 220, 0.4);
+    }
+    .series-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    .series-card-label {
+      padding: 14px 18px;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #7a9ebb;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="home-link" href="/">&#8592; Home</a>
+  <h1>ABOVE &amp; BEYOND</h1>
+</header>
+
+<div class="picker">
+  <a class="series-card" href="/above-and-beyond/s03">
+    <img src="/images/octonauts_above_and_beyond.webp" alt="Season 3">
+    <div class="series-card-label">SEASON 3</div>
+  </a>
+  <a class="series-card" href="/above-and-beyond/s04">
+    <img src="/images/octonauts_above_and_beyond.webp" alt="Season 4">
+    <div class="series-card-label">SEASON 4</div>
+  </a>
+</div>
+
+</body>
+</html>
+"""
+
+LANDING_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Octonauts for Alexander</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #8aafc5 url('/background.png') center center / cover fixed;
+      color: #e0f4ff;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #0b1e36;
+      border-bottom: 2px solid #1a4a6e;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      color: #5bc8f5;
+      flex: 1;
+      text-align: center;
+    }
+
+    .picker {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 60px 28px;
+      flex-wrap: wrap;
+    }
+
+    .series-card {
+      position: relative;
+      width: 360px;
+      background: #0d2240;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid #1a3a5c;
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: block;
+    }
+    .series-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 140, 220, 0.4);
+    }
+    .series-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    .series-card-label {
+      padding: 14px 18px;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #7a9ebb;
+      text-align: center;
+    }
+
+    .coming-soon-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(11, 30, 54, 0.82);
+      color: #5bc8f5;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid #1a4a6e;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>OCTONAUTS for ALEXANDER</h1>
+</header>
+
+<div class="picker">
+  <a class="series-card" href="/octonauts">
+    <img src="/images/octonauts.jpg" alt="Octonauts">
+    <div class="series-card-label">OCTONAUTS</div>
+  </a>
+  <a class="series-card" href="/above-and-beyond">
+    <img src="/images/octonauts_above_and_beyond.webp" alt="Octonauts: Above & Beyond">
+    <div class="series-card-label">ABOVE &amp; BEYOND</div>
+  </a>
+</div>
+
+</body>
+</html>
+"""
 
 HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Octonauts</title>
+  <title>{{ page_title }}</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -67,6 +300,16 @@ HTML = """<!DOCTYPE html>
       transition: background 0.15s;
     }
     #back-btn:hover { background: #255f8a; }
+    .home-link {
+      background: #1a4a6e;
+      color: #a0d8f0;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .home-link:hover { background: #255f8a; }
 
     /* ── Loading ──────────────────────────────────────── */
     #loading {
@@ -102,6 +345,23 @@ HTML = """<!DOCTYPE html>
       display: block;
       aspect-ratio: 16 / 9;
       object-fit: cover;
+      filter: grayscale(30%) brightness(0.75);
+      transition: filter 0.18s;
+    }
+    .card:hover img {
+      filter: grayscale(0%) brightness(1);
+    }
+    .card-no-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0a1a30;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4a6a88;
+      font-size: 0.85rem;
+      padding: 12px;
+      text-align: center;
     }
     .card-body {
       padding: 10px 14px 14px;
@@ -213,7 +473,7 @@ HTML = """<!DOCTYPE html>
       font-size: 0.85rem;
       letter-spacing: 1px;
     }
-    .slide-play-row { display: flex; gap: 12px; }
+    .slide-play-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
     #play-btn {
       background: #1278c4;
       border: none;
@@ -274,8 +534,9 @@ HTML = """<!DOCTYPE html>
 <body>
 
 <header>
+  <a class="home-link" href="{{ back_url }}">&#8592; Back</a>
   <button id="back-btn" onclick="goBack()">&#8592; Back</button>
-  <h1>OCTONAUTS for ALEXANDER</h1>
+  <h1>{{ page_title }}</h1>
 </header>
 
 <div id="loading">Loading library&hellip;</div>
@@ -317,8 +578,10 @@ HTML = """<!DOCTYPE html>
   }
 
   // ── load ─────────────────────────────────────────────
+  const API_URL = '{{ api_url }}';
+
   async function loadVideos() {
-    const res = await fetch('/api/videos');
+    const res = await fetch(API_URL);
     videos = await res.json();
     renderLibrary();
     hide('loading');
@@ -363,11 +626,14 @@ HTML = """<!DOCTYPE html>
           ? `<div class="card-remaining">${fmtDuration(remaining)} remaining</div>`
           : '';
 
+      const thumbSrc = v.grids && v.grids.length > 0 ? v.grids[0] : null;
+      const thumb = thumbSrc
+        ? `<img src="/media?path=${encodeURIComponent(thumbSrc)}" alt="${escHtml(v.title)}" loading="lazy">`
+        : `<div class="card-no-thumb">${escHtml(v.title)}</div>`;
       return `
         <div class="card" onclick="openSlideshow(${i})">
           ${badge}
-          <img src="/media?path=${encodeURIComponent(v.stills[0])}"
-               alt="${escHtml(v.title)}" loading="lazy">
+          ${thumb}
           ${progressBar}
           <div class="card-body">
             <div class="card-title">${escHtml(v.title)}</div>
@@ -408,6 +674,10 @@ HTML = """<!DOCTYPE html>
 
   function openSlideshow(i) {
     currentVideo = videos[i];
+    if (!currentVideo.grids || currentVideo.grids.length === 0) {
+      startPlayer(false);
+      return;
+    }
     slideIndex = 0;
     document.getElementById('slideshow-title').textContent = currentVideo.title;
     setSlide(null);
@@ -513,7 +783,38 @@ HTML = """<!DOCTYPE html>
 
 @app.route("/")
 def index():
-    return render_template_string(HTML)
+    return render_template_string(LANDING_HTML)
+
+
+@app.route("/octonauts")
+def octonauts():
+    return render_template_string(HTML, page_title="OCTONAUTS for ALEXANDER", api_url="/api/videos", back_url="/")
+
+
+@app.route("/above-and-beyond")
+def above_and_beyond():
+    return render_template_string(ABOVE_BEYOND_PICKER_HTML)
+
+
+@app.route("/above-and-beyond/s03")
+def above_and_beyond_s03():
+    return render_template_string(HTML, page_title="ABOVE AND BEYOND — SEASON 3", api_url="/api/above-and-beyond/s03/videos", back_url="/above-and-beyond")
+
+
+@app.route("/above-and-beyond/s04")
+def above_and_beyond_s04():
+    return render_template_string(HTML, page_title="ABOVE AND BEYOND — SEASON 4", api_url="/api/above-and-beyond/s04/videos", back_url="/above-and-beyond")
+
+
+@app.route("/images/<filename>")
+def image_file(filename):
+    p = (Path(__file__).parent / "images" / filename).resolve()
+    allowed = (Path(__file__).parent / "images").resolve()
+    if not str(p).startswith(str(allowed)):
+        abort(403)
+    if not p.is_file():
+        abort(404)
+    return send_file(p)
 
 
 @app.route("/background.png")
@@ -524,15 +825,33 @@ def background():
 
 @app.route("/api/videos")
 def api_videos():
-    return jsonify(load_all_metadata())
+    return jsonify(load_all_metadata(VIDEO_DIR))
+
+
+@app.route("/api/above-and-beyond/s03/videos")
+def api_above_and_beyond_s03_videos():
+    if ABOVE_BEYOND_S03_DIR is None:
+        return jsonify([])
+    return jsonify(load_all_metadata(ABOVE_BEYOND_S03_DIR))
+
+
+@app.route("/api/above-and-beyond/s04/videos")
+def api_above_and_beyond_s04_videos():
+    if ABOVE_BEYOND_S04_DIR is None:
+        return jsonify([])
+    return jsonify(load_all_metadata(ABOVE_BEYOND_S04_DIR))
 
 
 @app.route("/media")
 def media():
     raw = request.args.get("path", "")
     p = Path(raw).resolve()
-    allowed = VIDEO_DIR.resolve()
-    if not str(p).startswith(str(allowed)):
+    allowed_dirs = [VIDEO_DIR.resolve()]
+    if ABOVE_BEYOND_S03_DIR is not None:
+        allowed_dirs.append(ABOVE_BEYOND_S03_DIR.resolve())
+    if ABOVE_BEYOND_S04_DIR is not None:
+        allowed_dirs.append(ABOVE_BEYOND_S04_DIR.resolve())
+    if not any(str(p).startswith(str(d)) for d in allowed_dirs):
         abort(403)
     if not p.is_file():
         abort(404)
@@ -545,18 +864,38 @@ def main() -> None:
         "directory", nargs="?",
         default="/Users/bruno/Documents/Alexander stories/octonauts/s3",
         type=Path,
-        help="Directory containing the MP4 files and _stills folders",
+        help="Directory containing the Octonauts MP4 files and _stills folders",
+    )
+    parser.add_argument(
+        "--above-and-beyond-s03",
+        default="/Users/bruno/Documents/Alexander stories/octonauts-above-and-beyond/S03",
+        type=Path,
+        help="Directory for Above & Beyond Season 3",
+    )
+    parser.add_argument(
+        "--above-and-beyond-s04",
+        default="/Users/bruno/Documents/Alexander stories/octonauts-above-and-beyond/S04",
+        type=Path,
+        help="Directory for Above & Beyond Season 4",
     )
     parser.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
 
-    global VIDEO_DIR
+    global VIDEO_DIR, ABOVE_BEYOND_S03_DIR, ABOVE_BEYOND_S04_DIR
     VIDEO_DIR = args.directory.resolve()
+    if args.above_and_beyond_s03 and Path(args.above_and_beyond_s03).is_dir():
+        ABOVE_BEYOND_S03_DIR = Path(args.above_and_beyond_s03).resolve()
+    if args.above_and_beyond_s04 and Path(args.above_and_beyond_s04).is_dir():
+        ABOVE_BEYOND_S04_DIR = Path(args.above_and_beyond_s04).resolve()
     if not VIDEO_DIR.is_dir():
         print(f"Error: directory not found: {VIDEO_DIR}")
         raise SystemExit(1)
 
-    print(f"Serving {VIDEO_DIR}")
+    print(f"Octonauts:              {VIDEO_DIR}")
+    if ABOVE_BEYOND_S03_DIR:
+        print(f"Above & Beyond S03:     {ABOVE_BEYOND_S03_DIR}")
+    if ABOVE_BEYOND_S04_DIR:
+        print(f"Above & Beyond S04:     {ABOVE_BEYOND_S04_DIR}")
     print(f"Open http://localhost:{args.port}")
     app.run(host="0.0.0.0", port=args.port, debug=False)
 

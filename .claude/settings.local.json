@@ -14,7 +14,8 @@
       "Bash(ipconfig getifaddr *)",
       "Bash(scutil --get LocalHostName)",
       "Bash(scutil --get ComputerName)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/background.png)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/background.png)",
+      "Bash(python *)"
     ]
   }
 }

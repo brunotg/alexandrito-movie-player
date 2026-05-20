@@ -7,7 +7,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-from extract_stills import extract_frame, generate_title_card, get_duration, parse_title
+from extract_stills import extract_frame, generate_title_card, get_duration, parse_episode
 from generate_grids import PER_GRID, make_grid
 
 NUM_STILLS = 20
@@ -20,7 +20,7 @@ def process_video(video_path: Path, skip_existing: bool) -> str:
     if skip_existing and json_path.exists():
         return f"SKIP  {video_path.name}"
 
-    title = parse_title(video_path.name)
+    show, season, title = parse_episode(video_path.name, video_path.parent)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     duration = get_duration(video_path)
@@ -32,19 +32,27 @@ def process_video(video_path: Path, skip_existing: bool) -> str:
         extract_frame(video_path, still_path, ts)
         if i == 0:
             generate_title_card(still_path, title)
-        still_paths.append(str(still_path.resolve()))
+        still_paths.append(still_path)
+
+    num_grids = (len(still_paths) + PER_GRID - 1) // PER_GRID
+    grid_paths = []
+    for i in range(num_grids):
+        chunk = still_paths[i * PER_GRID : (i + 1) * PER_GRID]
+        grid_path = output_dir / f"grid_{i + 1:02d}.jpg"
+        make_grid(chunk, grid_path)
+        grid_paths.append(str(grid_path))
+
+    for p in still_paths:
+        p.unlink()
 
     json_path.write_text(json.dumps({
         "title": title,
+        "show": show,
+        "season": season,
         "source": str(video_path.resolve()),
-        "stills": still_paths,
+        "duration": duration,
+        "grids": grid_paths,
     }, indent=2))
-
-    stills = [Path(p) for p in still_paths]
-    num_grids = (len(stills) + PER_GRID - 1) // PER_GRID
-    for i in range(num_grids):
-        chunk = stills[i * PER_GRID : (i + 1) * PER_GRID]
-        make_grid(chunk, output_dir / f"grid_{i + 1:02d}.jpg")
 
     return f"DONE  {video_path.name}"
 
@@ -68,7 +76,7 @@ def main() -> None:
         print(f"Error: not a directory: {args.directory}", file=sys.stderr)
         sys.exit(1)
 
-    videos = sorted(args.directory.glob("*.mp4"))
+    videos = sorted(p for ext in ("*.mp4", "*.mkv") for p in args.directory.glob(ext))
     if not videos:
         print("No MP4 files found.", file=sys.stderr)
         sys.exit(1)
