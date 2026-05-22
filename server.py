@@ -12,6 +12,17 @@ app = Flask(__name__)
 VIDEO_DIR: Path = None
 ABOVE_BEYOND_S03_DIR: Path = None
 ABOVE_BEYOND_S04_DIR: Path = None
+STATE_FILE = Path(__file__).parent / "state.json"
+
+
+def load_state() -> dict:
+    if STATE_FILE.exists():
+        return json.loads(STATE_FILE.read_text())
+    return {}
+
+
+def save_state(state: dict) -> None:
+    STATE_FILE.write_text(json.dumps(state, indent=2))
 
 
 def _parse_title(stem: str) -> str:
@@ -565,6 +576,7 @@ HTML = """<!DOCTYPE html>
   let currentVideo = null;
   let slideIndex = 0;
   let view = 'library';   // 'library' | 'slideshow' | 'player'
+  let state = {};          // { [source]: { progress?, watched? } }
 
   // ── helpers ──────────────────────────────────────────
   function escHtml(s) {
@@ -577,26 +589,45 @@ HTML = """<!DOCTYPE html>
     document.getElementById(id).style.display = 'none';
   }
 
+  // ── server state helpers ──────────────────────────────
+  function postState(source, updates) {
+    fetch('/api/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source, ...updates }),
+    });
+  }
+
+  function saveProgress(v, t) {
+    (state[v.source] = state[v.source] || {}).progress = t;
+    postState(v.source, { progress: t });
+  }
+  function loadProgress(v)  { return state[v.source]?.progress || 0; }
+  function clearProgress(v) {
+    if (state[v.source]) delete state[v.source].progress;
+    postState(v.source, { progress: null });
+  }
+  function markWatched(v) {
+    (state[v.source] = state[v.source] || {}).watched = true;
+    postState(v.source, { watched: true });
+  }
+  function clearWatched(v) {
+    if (state[v.source]) delete state[v.source].watched;
+    postState(v.source, { watched: false });
+  }
+  function isWatched(v) { return !!(state[v.source]?.watched); }
+
   // ── load ─────────────────────────────────────────────
   const API_URL = '{{ api_url }}';
 
   async function loadVideos() {
-    const res = await fetch(API_URL);
-    videos = await res.json();
+    const [videosRes, stateRes] = await Promise.all([fetch(API_URL), fetch('/api/state')]);
+    videos = await videosRes.json();
+    state  = await stateRes.json();
     renderLibrary();
     hide('loading');
     show('library', 'grid');
   }
-
-  // ── localStorage helpers ─────────────────────────────
-  function progressKey(v)     { return 'progress:' + v.source; }
-  function watchedKey(v)      { return 'watched:'  + v.source; }
-  function saveProgress(v, t) { localStorage.setItem(progressKey(v), t); }
-  function loadProgress(v)    { return parseFloat(localStorage.getItem(progressKey(v))) || 0; }
-  function clearProgress(v)   { localStorage.removeItem(progressKey(v)); }
-  function markWatched(v)     { localStorage.setItem(watchedKey(v), '1'); }
-  function clearWatched(v)    { localStorage.removeItem(watchedKey(v)); }
-  function isWatched(v)       { return !!localStorage.getItem(watchedKey(v)); }
 
   // ── library ──────────────────────────────────────────
   function fmtDuration(secs) {
@@ -840,6 +871,35 @@ def api_above_and_beyond_s04_videos():
     if ABOVE_BEYOND_S04_DIR is None:
         return jsonify([])
     return jsonify(load_all_metadata(ABOVE_BEYOND_S04_DIR))
+
+
+@app.route("/api/state")
+def api_get_state():
+    return jsonify(load_state())
+
+
+@app.route("/api/state", methods=["POST"])
+def api_post_state():
+    body = request.get_json(force=True)
+    source = body.get("source")
+    if not source:
+        abort(400)
+    state = load_state()
+    entry = state.setdefault(source, {})
+    if "progress" in body:
+        if body["progress"] is None:
+            entry.pop("progress", None)
+        else:
+            entry["progress"] = body["progress"]
+    if "watched" in body:
+        if body["watched"]:
+            entry["watched"] = True
+        else:
+            entry.pop("watched", None)
+    if not entry:
+        state.pop(source, None)
+    save_state(state)
+    return jsonify({"ok": True})
 
 
 @app.route("/media")
