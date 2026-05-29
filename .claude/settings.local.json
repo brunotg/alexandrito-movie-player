@@ -15,7 +15,18 @@
       "Bash(scutil --get LocalHostName)",
       "Bash(scutil --get ComputerName)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/background.png)",
-      "Bash(python *)"
+      "Bash(python *)",
+      "Read(//Users/bruno/Documents/Alexander stories/octonauts-above-and-beyond/S04/**)",
+      "Bash(xargs cat)",
+      "Bash(curl -s http://localhost:8080/api/above-and-beyond/s03/videos)",
+      "Bash(npx playwright *)",
+      "Bash(node *)",
+      "Read(//private/tmp/**)",
+      "Bash(npm install *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/octonauts)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/above-and-beyond)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/api/state)",
+      "Bash(curl *)"
     ]
   }
 }

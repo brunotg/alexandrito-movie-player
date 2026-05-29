@@ -17,12 +17,16 @@ STATE_FILE = Path(__file__).parent / "state.json"
 
 def load_state() -> dict:
     if STATE_FILE.exists():
-        return json.loads(STATE_FILE.read_text())
+        text = STATE_FILE.read_text().strip()
+        if text:
+            return json.loads(text)
     return {}
 
 
 def save_state(state: dict) -> None:
-    STATE_FILE.write_text(json.dumps(state, indent=2))
+    tmp = STATE_FILE.with_suffix(".tmp")
+    tmp.write_text(json.dumps(state, indent=2))
+    tmp.replace(STATE_FILE)
 
 
 def _parse_title(stem: str) -> str:
