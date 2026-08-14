@@ -3,7 +3,9 @@
 
 import argparse
 import json
+import os
 import re
+import tempfile
 from pathlib import Path
 
 from flask import Flask, abort, jsonify, render_template_string, request, send_file
@@ -19,14 +21,23 @@ def load_state() -> dict:
     if STATE_FILE.exists():
         text = STATE_FILE.read_text().strip()
         if text:
-            return json.loads(text)
+            try:
+                return json.loads(text)
+            except json.JSONDecodeError:
+                app.logger.error("state.json is corrupt, resetting to empty state")
+                return {}
     return {}
 
 
 def save_state(state: dict) -> None:
-    tmp = STATE_FILE.with_suffix(".tmp")
-    tmp.write_text(json.dumps(state, indent=2))
-    tmp.replace(STATE_FILE)
+    fd, tmp_path = tempfile.mkstemp(dir=STATE_FILE.parent, suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w") as f:
+            f.write(json.dumps(state, indent=2))
+        Path(tmp_path).replace(STATE_FILE)
+    except Exception:
+        Path(tmp_path).unlink(missing_ok=True)
+        raise
 
 
 def _parse_title(stem: str) -> str:
