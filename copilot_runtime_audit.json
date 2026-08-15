@@ -1,0 +1,12 @@
+[
+  {
+    "event": "model_switch",
+    "from_model": "mai-code-1.1-flash",
+    "to_model": "gpt-5-mini",
+    "notified_message": "The model has been switched from mai-code-1.1-flash to gpt-5-mini.",
+    "session": "copilotcli:/13bf663c-7ffd-4b3b-bdce-804108283663",
+    "reported_at": "2026-08-15T05:57:45.075-07:00",
+    "recorded_at": "2026-08-15T05:59:10-07:00",
+    "notes": "Created by Copilot audit on user request."
+  }
+]
