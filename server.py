@@ -26,6 +26,7 @@ ROUTE_MAP: dict[str, dict] = {}
 
 STATE_FILE = Path(__file__).parent / "state.json"
 CONFIG_FILE = Path(__file__).parent / "library-config.json"
+TRANSITION_TIMER_FILE = Path(__file__).parent / "parrot_transition_timer.html"
 
 
 def load_state() -> dict:
@@ -1376,6 +1377,14 @@ def image_file(filename):
 def background():
     p = Path(__file__).parent / "background.png"
     return send_file(p)
+
+
+@app.route("/transition-timer")
+def transition_timer():
+    """Serve the animated between-episode timer."""
+    if not TRANSITION_TIMER_FILE.is_file():
+        abort(404)
+    return send_file(TRANSITION_TIMER_FILE)
 
 
 @app.route("/api/shows/<series_key>/<season_key>/videos")
