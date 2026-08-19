@@ -44,6 +44,24 @@ def _show_from_dir(directory: Path) -> str:
 def parse_episode(filename: str, directory: Path = None) -> tuple[str, str, str]:
     """Return (show, season, title) parsed from a video filename."""
     stem = Path(filename).stem
+    # "PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p"
+    m = re.match(
+        r"^(?P<show>.+?)\.S(?P<season>\d{1,2})E(?P<episode>\d{1,3})\.(?P<title>.+)$",
+        stem,
+        re.IGNORECASE,
+    )
+    if m:
+        title = re.sub(
+            r"(?:\.?\d{3,4}p|\.?WEBRip|\.?WEB-DL|\.?x264|\.?AAC(?:2\.0)?|\.?H\.?264|\.?NICK)+$",
+            "",
+            m.group("title"),
+            flags=re.IGNORECASE,
+        ).replace(".", " ").strip()
+        return (
+            m.group("show").replace(".", " ").strip(),
+            f"Season {int(m.group('season'))}",
+            f"{int(m.group('episode')):02d} - {title}",
+        )
     # "Above & Beyond S03_01. Pininga Turtle"
     m = re.match(r'(Above & Beyond)\s+S(\d+)_\d+\.\s*(.+)', stem)
     if m:

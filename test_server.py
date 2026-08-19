@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from server import _parse_title, load_all_metadata, load_state, save_state
+from extract_stills import parse_episode
 
 
 @pytest.fixture(autouse=True)
@@ -68,6 +69,20 @@ class TestParseTitle:
         """Handle empty string."""
         result = _parse_title("")
         assert result == ""
+
+    def test_paw_patrol_filename_format(self):
+        result = parse_episode("PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p.mp4")
+        assert result == ("PAW Patrol", "Season 1", "01 - Pups and the Kitty-tastrophe")
+
+    def test_paw_patrol_filename_with_web_suffix(self):
+        result = parse_episode(
+            "PAW.Patrol.S01E23.Pups.and.the.Ghost.Pirate.720p.WEBRip.x264.AAC.mp4"
+        )
+        assert result[2] == "23 - Pups and the Ghost Pirate"
+
+    def test_paw_patrol_filename_with_attached_quality_suffix(self):
+        result = parse_episode("PAW.Patrol.S04E35.Sea.Patrol.Pups.Save.a.Frozen.Flounder1080p.mkv")
+        assert result[2] == "35 - Sea Patrol Pups Save a Frozen Flounder"
 
 
 class TestStateManagement:

@@ -143,6 +143,29 @@ def scan_shows_directory(shows_dir: Path) -> dict[str, dict]:
     catalog = {}
     if not shows_dir or not shows_dir.is_dir():
         return catalog
+
+    child_directories = sorted(p for p in shows_dir.iterdir() if p.is_dir())
+    season_pattern = re.compile(r"^(?P<series>.+?)\s+Season\s+\d+$", re.IGNORECASE)
+    season_matches = [season_pattern.match(path.name) for path in child_directories]
+    if child_directories and all(season_matches):
+      series_name = season_matches[0].group("series").strip()
+      series_key = _slugify(series_name)
+      seasons = {}
+      for season_path in child_directories:
+        season_name = season_path.name
+        season_key = _slugify(season_name)
+        seasons[season_key] = {
+          "name": season_name,
+          "path": season_path,
+          "catalog": load_all_metadata(season_path),
+        }
+      return {
+        series_key: {
+          "name": series_name,
+          "path": shows_dir,
+          "seasons": seasons,
+        }
+      }
     
     for series_path in sorted(shows_dir.iterdir()):
         if not series_path.is_dir():

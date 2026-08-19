@@ -1,33 +1,1700 @@
 {
-  "shows": "/private/tmp/test-library/Shows",
-  "movies": "/private/tmp/test-library/Movies",
+  "shows": "/Volumes/Bruno's files/Alexandritos TV",
+  "movies": null,
   "catalog": {
     "shows": {
-      "octonauts": {
-        "name": "Octonauts",
-        "path": "/private/tmp/test-library/Shows/Octonauts",
+      "paw-patrol": {
+        "name": "Paw Patrol",
+        "path": "/Volumes/Bruno's files/Alexandritos TV",
         "seasons": {
-          "season-1": {
-            "name": "Season 1",
-            "path": "/private/tmp/test-library/Shows/Octonauts/Season 1",
-            "catalog": []
+          "paw-patrol-season-1": {
+            "name": "Paw Patrol Season 1",
+            "path": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1",
+            "catalog": [
+              {
+                "title": "01 - Pups and the Kitty-tastrophe",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p.mp4",
+                "duration": 710.376335,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "02 - Pups Save the Train",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E02.Pups.Save.the.Train.720p.mp4",
+                "duration": 742.491742,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E02.Pups.Save.the.Train.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E02.Pups.Save.the.Train.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E02.Pups.Save.the.Train.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E02.Pups.Save.the.Train.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E02.Pups.Save.the.Train.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "03 - Pup Pup Boogie",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E03.Pup.Pup.Boogie.720p.mp4",
+                "duration": 700.099399,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E03.Pup.Pup.Boogie.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E03.Pup.Pup.Boogie.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E03.Pup.Pup.Boogie.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E03.Pup.Pup.Boogie.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E03.Pup.Pup.Boogie.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "04 - Pups in a Fog",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E04.Pups.in.a.Fog.720p.mp4",
+                "duration": 730.240042,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E04.Pups.in.a.Fog.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E04.Pups.in.a.Fog.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E04.Pups.in.a.Fog.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E04.Pups.in.a.Fog.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E04.Pups.in.a.Fog.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "05 - Pups Save the Sea Turtles",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E05.Pups.Save.the.Sea.Turtles.720p.mp4",
+                "duration": 699.999299,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E05.Pups.Save.the.Sea.Turtles.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E05.Pups.Save.the.Sea.Turtles.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E05.Pups.Save.the.Sea.Turtles.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E05.Pups.Save.the.Sea.Turtles.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E05.Pups.Save.the.Sea.Turtles.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "06 - Pup and the Very Big Baby",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E06.Pup.and.the.Very.Big.Baby.720p.mp4",
+                "duration": 730.261375,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E06.Pup.and.the.Very.Big.Baby.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E06.Pup.and.the.Very.Big.Baby.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E06.Pup.and.the.Very.Big.Baby.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E06.Pup.and.the.Very.Big.Baby.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E06.Pup.and.the.Very.Big.Baby.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "07 - Pups Save the Circus",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E07.Pups.Save.the.Circus.720p.mp4",
+                "duration": 709.45875,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E07.Pups.Save.the.Circus.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E07.Pups.Save.the.Circus.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E07.Pups.Save.the.Circus.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E07.Pups.Save.the.Circus.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E07.Pups.Save.the.Circus.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "08 - Pup a Doodle Do",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E08.Pup.a.Doodle.Do.720p.mp4",
+                "duration": 742.741992,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E08.Pup.a.Doodle.Do.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E08.Pup.a.Doodle.Do.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E08.Pup.a.Doodle.Do.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E08.Pup.a.Doodle.Do.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E08.Pup.a.Doodle.Do.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "09 - Pup Pup Goose",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E09.Pup.Pup.Goose.720p.mp4",
+                "duration": 709.291917,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E09.Pup.Pup.Goose.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E09.Pup.Pup.Goose.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E09.Pup.Pup.Goose.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E09.Pup.Pup.Goose.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E09.Pup.Pup.Goose.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "10 - Pup Pup and Away",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E10.Pup.Pup.and.Away.720p.mp4",
+                "duration": 743.033951,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E10.Pup.Pup.and.Away.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E10.Pup.Pup.and.Away.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E10.Pup.Pup.and.Away.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E10.Pup.Pup.and.Away.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E10.Pup.Pup.and.Away.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "11 - Pups Pit Crew",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E11.Pups.Pit.Crew.720p.mp4",
+                "duration": 700.232866,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E11.Pups.Pit.Crew.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E11.Pups.Pit.Crew.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E11.Pups.Pit.Crew.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E11.Pups.Pit.Crew.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E11.Pups.Pit.Crew.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "12 - Pups Fight Fire",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E12.Pups.Fight.Fire.720p.mp4",
+                "duration": 730.517375,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E12.Pups.Fight.Fire.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E12.Pups.Fight.Fire.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E12.Pups.Fight.Fire.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E12.Pups.Fight.Fire.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E12.Pups.Fight.Fire.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "13 - Pups Save the Bunnies",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E13.Pups.Save.the.Bunnies.720p.mp4",
+                "duration": 700.066033,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E13.Pups.Save.the.Bunnies.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E13.Pups.Save.the.Bunnies.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E13.Pups.Save.the.Bunnies.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E13.Pups.Save.the.Bunnies.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E13.Pups.Save.the.Bunnies.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "14 - Puptacular",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E14.Puptacular.720p.mp4",
+                "duration": 730.325375,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E14.Puptacular.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E14.Puptacular.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E14.Puptacular.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E14.Puptacular.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E14.Puptacular.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "15 - Pups Save the Bay",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E15.Pups.Save.the.Bay.720p.mp4",
+                "duration": 700.332966,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E15.Pups.Save.the.Bay.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E15.Pups.Save.the.Bay.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E15.Pups.Save.the.Bay.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E15.Pups.Save.the.Bay.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E15.Pups.Save.the.Bay.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "16 - Pups Save the Bay",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E16.Pups.Save.the.Bay.720p.mp4",
+                "duration": 730.496042,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E16.Pups.Save.the.Bay.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E16.Pups.Save.the.Bay.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E16.Pups.Save.the.Bay.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E16.Pups.Save.the.Bay.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E16.Pups.Save.the.Bay.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "17 - Pups Get a Rubble",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E17.Pups.Get.a.Rubble.720p.mp4",
+                "duration": 700.132766,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E17.Pups.Get.a.Rubble.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E17.Pups.Get.a.Rubble.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E17.Pups.Get.a.Rubble.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E17.Pups.Get.a.Rubble.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E17.Pups.Get.a.Rubble.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "18 - Pups Save a Walrus",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E18.Pups.Save.a.Walrus.720p.mp4",
+                "duration": 730.346708,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E18.Pups.Save.a.Walrus.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E18.Pups.Save.a.Walrus.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E18.Pups.Save.a.Walrus.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E18.Pups.Save.a.Walrus.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E18.Pups.Save.a.Walrus.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "19 - Pups Save the Treats",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E19.Pups.Save.the.Treats.720p.mp4",
+                "duration": 700.833467,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E19.Pups.Save.the.Treats.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E19.Pups.Save.the.Treats.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E19.Pups.Save.the.Treats.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E19.Pups.Save.the.Treats.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E19.Pups.Save.the.Treats.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "20 - Pups Get a Lift",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E20.Pups.Get.a.Lift.720p.mp4",
+                "duration": 731.626708,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E20.Pups.Get.a.Lift.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E20.Pups.Get.a.Lift.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E20.Pups.Get.a.Lift.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E20.Pups.Get.a.Lift.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E20.Pups.Get.a.Lift.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "21 - Pups Save a Hoedown",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E21.Pups.Save.a.Hoedown.720p.mp4",
+                "duration": 700.099399,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E21.Pups.Save.a.Hoedown.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E21.Pups.Save.a.Hoedown.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E21.Pups.Save.a.Hoedown.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E21.Pups.Save.a.Hoedown.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E21.Pups.Save.a.Hoedown.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "22 - Pups Save Alex",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E22.Pups.Save.Alex.720p.mp4",
+                "duration": 730.453375,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E22.Pups.Save.Alex.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E22.Pups.Save.Alex.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E22.Pups.Save.Alex.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E22.Pups.Save.Alex.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E22.Pups.Save.Alex.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "23 - Pups and the Ghost Pirate",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E23.Pups.and.the.Ghost.Pirate.720p.WEBRip.x264.AAC.mp4",
+                "duration": 1390.528,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E23.Pups.and.the.Ghost.Pirate.720p.WEBRip.x264.AAC_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E23.Pups.and.the.Ghost.Pirate.720p.WEBRip.x264.AAC_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E23.Pups.and.the.Ghost.Pirate.720p.WEBRip.x264.AAC_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E23.Pups.and.the.Ghost.Pirate.720p.WEBRip.x264.AAC_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E23.Pups.and.the.Ghost.Pirate.720p.WEBRip.x264.AAC_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "24 - Pups Save a School Day",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E24.Pups.Save.a.School.Day.720p.mp4",
+                "duration": 700.099399,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E24.Pups.Save.a.School.Day.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E24.Pups.Save.a.School.Day.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E24.Pups.Save.a.School.Day.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E24.Pups.Save.a.School.Day.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E24.Pups.Save.a.School.Day.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "25 - Pups Turn On the Lights",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E25.Pups.Turn.On.the.Lights.720p.mp4",
+                "duration": 730.560042,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E25.Pups.Turn.On.the.Lights.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E25.Pups.Turn.On.the.Lights.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E25.Pups.Turn.On.the.Lights.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E25.Pups.Turn.On.the.Lights.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E25.Pups.Turn.On.the.Lights.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "26 - Pups Save a Pool Day",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E26.Pups.Save.a.Pool.Day.720p.mp4",
+                "duration": 700.099399,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E26.Pups.Save.a.Pool.Day.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E26.Pups.Save.a.Pool.Day.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E26.Pups.Save.a.Pool.Day.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E26.Pups.Save.a.Pool.Day.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E26.Pups.Save.a.Pool.Day.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "27 - Circus Pup Formers",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E27.Circus.Pup.Formers.720p.mp4",
+                "duration": 730.624042,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E27.Circus.Pup.Formers.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E27.Circus.Pup.Formers.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E27.Circus.Pup.Formers.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E27.Circus.Pup.Formers.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E27.Circus.Pup.Formers.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "28 - Pups Make a Splash",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E28.Pups.Make.a.Splash.720p.mp4",
+                "duration": 700.099399,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E28.Pups.Make.a.Splash.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E28.Pups.Make.a.Splash.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E28.Pups.Make.a.Splash.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E28.Pups.Make.a.Splash.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E28.Pups.Make.a.Splash.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "29 - Pups Fall Festival",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E29.Pups.Fall.Festival.720p.mp4",
+                "duration": 730.645375,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E29.Pups.Fall.Festival.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E29.Pups.Fall.Festival.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E29.Pups.Fall.Festival.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E29.Pups.Fall.Festival.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E29.Pups.Fall.Festival.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "30 - Pups Save Christmas",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E30.Pups.Save.Christmas.720p.WEBRip.x264.AAC.mp4",
+                "duration": 1390.912,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E30.Pups.Save.Christmas.720p.WEBRip.x264.AAC_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E30.Pups.Save.Christmas.720p.WEBRip.x264.AAC_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E30.Pups.Save.Christmas.720p.WEBRip.x264.AAC_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E30.Pups.Save.Christmas.720p.WEBRip.x264.AAC_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E30.Pups.Save.Christmas.720p.WEBRip.x264.AAC_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "31 - Pups on Ice",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E31.Pups.on.Ice.720p.mp4",
+                "duration": 700.032666,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E31.Pups.on.Ice.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E31.Pups.on.Ice.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E31.Pups.on.Ice.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E31.Pups.on.Ice.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E31.Pups.on.Ice.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "32 - Pups and the Snow Monster",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E32.Pups.and.the.Snow.Monster.720p.mp4",
+                "duration": 730.560042,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E32.Pups.and.the.Snow.Monster.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E32.Pups.and.the.Snow.Monster.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E32.Pups.and.the.Snow.Monster.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E32.Pups.and.the.Snow.Monster.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E32.Pups.and.the.Snow.Monster.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "33 - Pups Save a Super Pup",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E33.Pups.Save.a.Super.Pup.720p.mp4",
+                "duration": 700.032666,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E33.Pups.Save.a.Super.Pup.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E33.Pups.Save.a.Super.Pup.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E33.Pups.Save.a.Super.Pup.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E33.Pups.Save.a.Super.Pup.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E33.Pups.Save.a.Super.Pup.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "34 - Pups Save Ryders Robot",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E34.Pups.Save.Ryders.Robot.720p.mp4",
+                "duration": 730.602708,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E34.Pups.Save.Ryders.Robot.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E34.Pups.Save.Ryders.Robot.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E34.Pups.Save.Ryders.Robot.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E34.Pups.Save.Ryders.Robot.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E34.Pups.Save.Ryders.Robot.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "35 - Pups Save a Monkey",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E35.Pups.Save.a.Monkey.720p.mp4",
+                "duration": 700.366333,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E35.Pups.Save.a.Monkey.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E35.Pups.Save.a.Monkey.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E35.Pups.Save.a.Monkey.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E35.Pups.Save.a.Monkey.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E35.Pups.Save.a.Monkey.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "36 - Pups Save a Hoot",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E36.Pups.Save.a.Hoot.720p.mp4",
+                "duration": 730.922708,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E36.Pups.Save.a.Hoot.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E36.Pups.Save.a.Hoot.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E36.Pups.Save.a.Hoot.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E36.Pups.Save.a.Hoot.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E36.Pups.Save.a.Hoot.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "37 - Pups Save a Bat",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E37.Pups.Save.a.Bat.720p.mp4",
+                "duration": 708.541166,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E37.Pups.Save.a.Bat.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E37.Pups.Save.a.Bat.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E37.Pups.Save.a.Bat.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E37.Pups.Save.a.Bat.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E37.Pups.Save.a.Bat.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "38 - Pups Save a Toof",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E38.Pups.Save.a.Toof.720p.mp4",
+                "duration": 741.824408,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E38.Pups.Save.a.Toof.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E38.Pups.Save.a.Toof.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E38.Pups.Save.a.Toof.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E38.Pups.Save.a.Toof.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E38.Pups.Save.a.Toof.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "39 - Pups Save the Easter Egg Hunt",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E39.Pups.Save.the.Easter.Egg.Hunt.720p.WEBRip.x264.AAC.mp4",
+                "duration": 1390.698667,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E39.Pups.Save.the.Easter.Egg.Hunt.720p.WEBRip.x264.AAC_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E39.Pups.Save.the.Easter.Egg.Hunt.720p.WEBRip.x264.AAC_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E39.Pups.Save.the.Easter.Egg.Hunt.720p.WEBRip.x264.AAC_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E39.Pups.Save.the.Easter.Egg.Hunt.720p.WEBRip.x264.AAC_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E39.Pups.Save.the.Easter.Egg.Hunt.720p.WEBRip.x264.AAC_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "40 - Pups and the Lighthouse Boogie",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E40.Pups.and.the.Lighthouse.Boogie.720p.mp4",
+                "duration": 700.166133,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E40.Pups.and.the.Lighthouse.Boogie.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E40.Pups.and.the.Lighthouse.Boogie.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E40.Pups.and.the.Lighthouse.Boogie.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E40.Pups.and.the.Lighthouse.Boogie.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E40.Pups.and.the.Lighthouse.Boogie.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "41 - Pups Save Ryder",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E41.Pups.Save.Ryder.720p.mp4",
+                "duration": 730.794708,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E41.Pups.Save.Ryder.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E41.Pups.Save.Ryder.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E41.Pups.Save.Ryder.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E41.Pups.Save.Ryder.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E41.Pups.Save.Ryder.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "42 - Pups Great Race",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E42.Pups.Great.Race.720p.mp4",
+                "duration": 700.199499,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E42.Pups.Great.Race.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E42.Pups.Great.Race.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E42.Pups.Great.Race.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E42.Pups.Great.Race.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E42.Pups.Great.Race.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "43 - Pups Take the Cake",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E43.Pups.Take.the.Cake.720p.mp4",
+                "duration": 730.773375,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E43.Pups.Take.the.Cake.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E43.Pups.Take.the.Cake.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E43.Pups.Take.the.Cake.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E43.Pups.Take.the.Cake.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E43.Pups.Take.the.Cake.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "44 - Pups Save the Camping Trip",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E44.Pups.Save.the.Camping.Trip.720p.mp4",
+                "duration": 700.166133,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E44.Pups.Save.the.Camping.Trip.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E44.Pups.Save.the.Camping.Trip.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E44.Pups.Save.the.Camping.Trip.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E44.Pups.Save.the.Camping.Trip.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E44.Pups.Save.the.Camping.Trip.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "45 - Pups Save the Camping Trip",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E45.Pups.Save.the.Camping.Trip.720p.mp4",
+                "duration": 730.794708,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E45.Pups.Save.the.Camping.Trip.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E45.Pups.Save.the.Camping.Trip.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E45.Pups.Save.the.Camping.Trip.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E45.Pups.Save.the.Camping.Trip.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E45.Pups.Save.the.Camping.Trip.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "46 - Pups and the Beanstalk",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E46.Pups.and.the.Beanstalk.720p.mp4",
+                "duration": 700.032666,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E46.Pups.and.the.Beanstalk.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E46.Pups.and.the.Beanstalk.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E46.Pups.and.the.Beanstalk.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E46.Pups.and.the.Beanstalk.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E46.Pups.and.the.Beanstalk.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "47 - Pups Save the Turbots",
+                "show": "PAW Patrol",
+                "season": "Season 1",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E47.Pups.Save.the.Turbots.720p.mp4",
+                "duration": 730.560042,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E47.Pups.Save.the.Turbots.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E47.Pups.Save.the.Turbots.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E47.Pups.Save.the.Turbots.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E47.Pups.Save.the.Turbots.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E47.Pups.Save.the.Turbots.720p_stills/grid_05.jpg"
+                ]
+              }
+            ]
+          },
+          "paw-patrol-season-4": {
+            "name": "Paw Patrol Season 4",
+            "path": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4",
+            "catalog": [
+              {
+                "title": "06 - Pups Save the Playful Dragon",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E06.Pups.Save.the.Playful.Dragon.1080p.mp4",
+                "duration": 700.577922,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E06.Pups.Save.the.Playful.Dragon.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E06.Pups.Save.the.Playful.Dragon.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E06.Pups.Save.the.Playful.Dragon.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E06.Pups.Save.the.Playful.Dragon.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E06.Pups.Save.the.Playful.Dragon.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "16 - Mission PAW Pups Save The Royal Throne 1080p NICK WEBRip AAC2 0 x264-RTN",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E16.Mission.PAW.Pups.Save.The.Royal.Throne.1080p.NICK.WEBRip.AAC2.0.x264-RTN.mkv",
+                "duration": 1390.778,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E16.Mission.PAW.Pups.Save.The.Royal.Throne.1080p.NICK.WEBRip.AAC2.0.x264-RTN_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E16.Mission.PAW.Pups.Save.The.Royal.Throne.1080p.NICK.WEBRip.AAC2.0.x264-RTN_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E16.Mission.PAW.Pups.Save.The.Royal.Throne.1080p.NICK.WEBRip.AAC2.0.x264-RTN_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E16.Mission.PAW.Pups.Save.The.Royal.Throne.1080p.NICK.WEBRip.AAC2.0.x264-RTN_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E16.Mission.PAW.Pups.Save.The.Royal.Throne.1080p.NICK.WEBRip.AAC2.0.x264-RTN_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "17 - Sea Patrol Pups Save A Baby Octopus 1080p NICK WEB-DL AAC2 0 x264-RTN",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E17.Sea.Patrol.Pups.Save.A.Baby.Octopus.1080p.NICK.WEB-DL.AAC2.0.x264-RTN.mkv",
+                "duration": 1392.809,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E17.Sea.Patrol.Pups.Save.A.Baby.Octopus.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E17.Sea.Patrol.Pups.Save.A.Baby.Octopus.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E17.Sea.Patrol.Pups.Save.A.Baby.Octopus.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E17.Sea.Patrol.Pups.Save.A.Baby.Octopus.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E17.Sea.Patrol.Pups.Save.A.Baby.Octopus.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "18 - Pups Save the Runaway Kitties",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E18.Pups.Save.the.Runaway.Kitties.720p.mp4",
+                "duration": 700.424077,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E18.Pups.Save.the.Runaway.Kitties.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E18.Pups.Save.the.Runaway.Kitties.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E18.Pups.Save.the.Runaway.Kitties.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E18.Pups.Save.the.Runaway.Kitties.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E18.Pups.Save.the.Runaway.Kitties.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "19 - Pups Save Tiny Marshall",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E19.Pups.Save.Tiny.Marshall.720p.mp4",
+                "duration": 730.667283,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E19.Pups.Save.Tiny.Marshall.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E19.Pups.Save.Tiny.Marshall.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E19.Pups.Save.Tiny.Marshall.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E19.Pups.Save.Tiny.Marshall.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E19.Pups.Save.Tiny.Marshall.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "20 - Pups Chill Out",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E20.Pups.Chill.Out.1080p.mkv",
+                "duration": 700.317,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E20.Pups.Chill.Out.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E20.Pups.Chill.Out.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E20.Pups.Chill.Out.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E20.Pups.Chill.Out.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E20.Pups.Chill.Out.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "21 - Pups Save Farmer Alex",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E21.Pups.Save.Farmer.Alex.1080p.mkv",
+                "duration": 730.611,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E21.Pups.Save.Farmer.Alex.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E21.Pups.Save.Farmer.Alex.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E21.Pups.Save.Farmer.Alex.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E21.Pups.Save.Farmer.Alex.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E21.Pups.Save.Farmer.Alex.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "22 - Pups Save Big Hairy",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E22.Pups.Save.Big.Hairy.1080p.mkv",
+                "duration": 700.607,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E22.Pups.Save.Big.Hairy.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E22.Pups.Save.Big.Hairy.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E22.Pups.Save.Big.Hairy.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E22.Pups.Save.Big.Hairy.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E22.Pups.Save.Big.Hairy.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "23 - Pups Save A Flying Kitty",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E23.Pups.Save.A.Flying.Kitty.1080p.mkv",
+                "duration": 730.525,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E23.Pups.Save.A.Flying.Kitty.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E23.Pups.Save.A.Flying.Kitty.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E23.Pups.Save.A.Flying.Kitty.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E23.Pups.Save.A.Flying.Kitty.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E23.Pups.Save.A.Flying.Kitty.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "24 - Sea Patrol Pups Save a Shark",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E24.Sea.Patrol.Pups.Save.a.Shark.720p.mp4",
+                "duration": 700.298106,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E24.Sea.Patrol.Pups.Save.a.Shark.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E24.Sea.Patrol.Pups.Save.a.Shark.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E24.Sea.Patrol.Pups.Save.a.Shark.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E24.Sea.Patrol.Pups.Save.a.Shark.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E24.Sea.Patrol.Pups.Save.a.Shark.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "25 - Sea Patrol Pups Save the Pier",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E25.Sea.Patrol.Pups.Save.the.Pier.720p.mp4",
+                "duration": 730.541269,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E25.Sea.Patrol.Pups.Save.the.Pier.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E25.Sea.Patrol.Pups.Save.the.Pier.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E25.Sea.Patrol.Pups.Save.the.Pier.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E25.Sea.Patrol.Pups.Save.the.Pier.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E25.Sea.Patrol.Pups.Save.the.Pier.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "26 - Pups Save a Space Rock",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E26.Pups.Save.a.Space.Rock.1080p.mkv",
+                "duration": 700.817,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E26.Pups.Save.a.Space.Rock.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E26.Pups.Save.a.Space.Rock.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E26.Pups.Save.a.Space.Rock.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E26.Pups.Save.a.Space.Rock.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E26.Pups.Save.a.Space.Rock.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "27 - Pups Save a Good Mayor",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E27.Pups.Save.a.Good.Mayor.1080p.mkv",
+                "duration": 730.847,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E27.Pups.Save.a.Good.Mayor.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E27.Pups.Save.a.Good.Mayor.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E27.Pups.Save.a.Good.Mayor.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E27.Pups.Save.a.Good.Mayor.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E27.Pups.Save.a.Good.Mayor.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "28 - Pups Save a City Kitty",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E28.Pups.Save.a.City.Kitty.1080p.mkv",
+                "duration": 730.142,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E28.Pups.Save.a.City.Kitty.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E28.Pups.Save.a.City.Kitty.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E28.Pups.Save.a.City.Kitty.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E28.Pups.Save.a.City.Kitty.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E28.Pups.Save.a.City.Kitty.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "29 - Pups Save a Cloud Surfer",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E29.Pups.Save.a.Cloud.Surfer.1080p.mkv",
+                "duration": 730.309,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E29.Pups.Save.a.Cloud.Surfer.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E29.Pups.Save.a.Cloud.Surfer.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E29.Pups.Save.a.Cloud.Surfer.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E29.Pups.Save.a.Cloud.Surfer.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E29.Pups.Save.a.Cloud.Surfer.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "30 - Pups Save a Sleepwalking Bear",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E30.Pups.Save.a.Sleepwalking.Bear.720p.mp4",
+                "duration": 661.243875,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E30.Pups.Save.a.Sleepwalking.Bear.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E30.Pups.Save.a.Sleepwalking.Bear.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E30.Pups.Save.a.Sleepwalking.Bear.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E30.Pups.Save.a.Sleepwalking.Bear.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E30.Pups.Save.a.Sleepwalking.Bear.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "31 - Pups Save Dude Ranch Danny",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E31.Pups.Save.Dude.Ranch.Danny.720p.mp4",
+                "duration": 661.243875,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E31.Pups.Save.Dude.Ranch.Danny.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E31.Pups.Save.Dude.Ranch.Danny.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E31.Pups.Save.Dude.Ranch.Danny.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E31.Pups.Save.Dude.Ranch.Danny.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E31.Pups.Save.Dude.Ranch.Danny.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "32 - Sea Patrol Pirate Pups to the Rescue 1080p NICK WEB-DL AAC2 0 x264-RTN",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E32.Sea.Patrol.Pirate.Pups.to.the.Rescue.1080p.NICK.WEB-DL.AAC2.0.x264-RTN.mkv",
+                "duration": 1386.595,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E32.Sea.Patrol.Pirate.Pups.to.the.Rescue.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E32.Sea.Patrol.Pirate.Pups.to.the.Rescue.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E32.Sea.Patrol.Pirate.Pups.to.the.Rescue.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E32.Sea.Patrol.Pirate.Pups.to.the.Rescue.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E32.Sea.Patrol.Pirate.Pups.to.the.Rescue.1080p.NICK.WEB-DL.AAC2.0.x264-RTN_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "33 - Pups Save the Mail",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E33.Pups.Save.the.Mail.1080p.mkv",
+                "duration": 700.397,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E33.Pups.Save.the.Mail.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E33.Pups.Save.the.Mail.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E33.Pups.Save.the.Mail.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E33.Pups.Save.the.Mail.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E33.Pups.Save.the.Mail.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "34 - Pups Save a Frog Mayor",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E34.Pups.Save.a.Frog.Mayor.1080p.mkv",
+                "duration": 726.533,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E34.Pups.Save.a.Frog.Mayor.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E34.Pups.Save.a.Frog.Mayor.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E34.Pups.Save.a.Frog.Mayor.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E34.Pups.Save.a.Frog.Mayor.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E34.Pups.Save.a.Frog.Mayor.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "35 - Sea Patrol Pups Save a Frozen Flounder",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E35.Sea.Patrol.Pups.Save.a.Frozen.Flounder1080p.mkv",
+                "duration": 700.313,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E35.Sea.Patrol.Pups.Save.a.Frozen.Flounder1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E35.Sea.Patrol.Pups.Save.a.Frozen.Flounder1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E35.Sea.Patrol.Pups.Save.a.Frozen.Flounder1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E35.Sea.Patrol.Pups.Save.a.Frozen.Flounder1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E35.Sea.Patrol.Pups.Save.a.Frozen.Flounder1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "36 - Sea Patrol Pups Save a Narwhal",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E36.Sea.Patrol.Pups.Save.a.Narwhal.1080p.mkv",
+                "duration": 730.553,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E36.Sea.Patrol.Pups.Save.a.Narwhal.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E36.Sea.Patrol.Pups.Save.a.Narwhal.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E36.Sea.Patrol.Pups.Save.a.Narwhal.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E36.Sea.Patrol.Pups.Save.a.Narwhal.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E36.Sea.Patrol.Pups.Save.a.Narwhal.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "37 - Pups Save the Runaway Turtles",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E37.Pups.Save.the.Runaway.Turtles.1080p.mkv",
+                "duration": 730.225,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E37.Pups.Save.the.Runaway.Turtles.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E37.Pups.Save.the.Runaway.Turtles.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E37.Pups.Save.the.Runaway.Turtles.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E37.Pups.Save.the.Runaway.Turtles.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E37.Pups.Save.the.Runaway.Turtles.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "38 - Pups Save the Shivering Sheep",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E38.Pups.Save.the.Shivering.Sheep.1080p.mkv",
+                "duration": 730.267,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E38.Pups.Save.the.Shivering.Sheep.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E38.Pups.Save.the.Shivering.Sheep.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E38.Pups.Save.the.Shivering.Sheep.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E38.Pups.Save.the.Shivering.Sheep.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E38.Pups.Save.the.Shivering.Sheep.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "39 - Pups Party with Bats",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E39.Pups.Party.with.Bats.1080p.mkv",
+                "duration": 700.817,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E39.Pups.Party.with.Bats.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E39.Pups.Party.with.Bats.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E39.Pups.Party.with.Bats.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E39.Pups.Party.with.Bats.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E39.Pups.Party.with.Bats.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "40 - Pups Save Sensei Yumi",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E40.Pups.Save.Sensei.Yumi.720p.mkv",
+                "duration": 730.768,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E40.Pups.Save.Sensei.Yumi.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E40.Pups.Save.Sensei.Yumi.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E40.Pups.Save.Sensei.Yumi.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E40.Pups.Save.Sensei.Yumi.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E40.Pups.Save.Sensei.Yumi.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "41 - Sea Patrol Pups Save Puplantis",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E41.Sea.Patrol.Pups.Save.Puplantis.720p.mp4",
+                "duration": 1322.112458,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E41.Sea.Patrol.Pups.Save.Puplantis.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E41.Sea.Patrol.Pups.Save.Puplantis.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E41.Sea.Patrol.Pups.Save.Puplantis.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E41.Sea.Patrol.Pups.Save.Puplantis.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E41.Sea.Patrol.Pups.Save.Puplantis.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "42 - Pups Save Francois the Penguin",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E42.Pups.Save.Francois.the.Penguin.720p.mp4",
+                "duration": 662.202958,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E42.Pups.Save.Francois.the.Penguin.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E42.Pups.Save.Francois.the.Penguin.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E42.Pups.Save.Francois.the.Penguin.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E42.Pups.Save.Francois.the.Penguin.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E42.Pups.Save.Francois.the.Penguin.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "43 - Pups Save Daring Danny's Hippo",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E43.Pups.Save.Daring.Danny's.Hippo.720p.mp4",
+                "duration": 661.202167,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E43.Pups.Save.Daring.Danny's.Hippo.720p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E43.Pups.Save.Daring.Danny's.Hippo.720p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E43.Pups.Save.Daring.Danny's.Hippo.720p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E43.Pups.Save.Daring.Danny's.Hippo.720p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E43.Pups.Save.Daring.Danny's.Hippo.720p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "44 - Pups Save Baby Humdinger",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E44.Pups.Save.Baby.Humdinger.1080p.mkv",
+                "duration": 730.142,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E44.Pups.Save.Baby.Humdinger.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E44.Pups.Save.Baby.Humdinger.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E44.Pups.Save.Baby.Humdinger.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E44.Pups.Save.Baby.Humdinger.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E44.Pups.Save.Baby.Humdinger.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "45 - Pups Save a Pinata",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E45.Pups.Save.a.Pinata.1080p.mkv",
+                "duration": 730.225,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E45.Pups.Save.a.Pinata.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E45.Pups.Save.a.Pinata.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E45.Pups.Save.a.Pinata.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E45.Pups.Save.a.Pinata.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E45.Pups.Save.a.Pinata.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "46 - Pups Save Luke Stars",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E46.Pups.Save.Luke.Stars.1080p.mkv",
+                "duration": 730.434,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E46.Pups.Save.Luke.Stars.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E46.Pups.Save.Luke.Stars.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E46.Pups.Save.Luke.Stars.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E46.Pups.Save.Luke.Stars.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E46.Pups.Save.Luke.Stars.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "47 - Pups Save Chicken Day",
+                "show": "PAW Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E47.Pups.Save.Chicken.Day.1080p.mkv",
+                "duration": 730.475,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E47.Pups.Save.Chicken.Day.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E47.Pups.Save.Chicken.Day.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E47.Pups.Save.Chicken.Day.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E47.Pups.Save.Chicken.Day.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/PAW.Patrol.S04E47.Pups.Save.Chicken.Day.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "01 - Pups Save A Blimp",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E01.Pups.Save.A.Blimp.1080p.WEB-DL.AAC2.0.H.264.mkv",
+                "duration": 710.271,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E01.Pups.Save.A.Blimp.1080p.WEB-DL.AAC2.0.H.264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E01.Pups.Save.A.Blimp.1080p.WEB-DL.AAC2.0.H.264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E01.Pups.Save.A.Blimp.1080p.WEB-DL.AAC2.0.H.264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E01.Pups.Save.A.Blimp.1080p.WEB-DL.AAC2.0.H.264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E01.Pups.Save.A.Blimp.1080p.WEB-DL.AAC2.0.H.264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "02 - Pups Save A Chili Cook-Out",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E02.Pups.Save.A.Chili.Cook-Out.1080p.WEB-DL.AAC2.0.H.264.mkv",
+                "duration": 695.744,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E02.Pups.Save.A.Chili.Cook-Out.1080p.WEB-DL.AAC2.0.H.264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E02.Pups.Save.A.Chili.Cook-Out.1080p.WEB-DL.AAC2.0.H.264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E02.Pups.Save.A.Chili.Cook-Out.1080p.WEB-DL.AAC2.0.H.264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E02.Pups.Save.A.Chili.Cook-Out.1080p.WEB-DL.AAC2.0.H.264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E02.Pups.Save.A.Chili.Cook-Out.1080p.WEB-DL.AAC2.0.H.264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "03 - Pups Save a Teeny Tiny Penguin",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E03.Pups.Save.a.Teeny.Tiny.Penguin.1080p.WEB-DL.AAC2.0.H.264.mkv",
+                "duration": 711.007,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E03.Pups.Save.a.Teeny.Tiny.Penguin.1080p.WEB-DL.AAC2.0.H.264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E03.Pups.Save.a.Teeny.Tiny.Penguin.1080p.WEB-DL.AAC2.0.H.264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E03.Pups.Save.a.Teeny.Tiny.Penguin.1080p.WEB-DL.AAC2.0.H.264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E03.Pups.Save.a.Teeny.Tiny.Penguin.1080p.WEB-DL.AAC2.0.H.264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E03.Pups.Save.a.Teeny.Tiny.Penguin.1080p.WEB-DL.AAC2.0.H.264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "04 - Pups Save the Cat Show",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E04.Pups.Save.the.Cat.Show.1080p.WEB-DL.AAC2.0.H.264.mkv",
+                "duration": 695.576,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E04.Pups.Save.the.Cat.Show.1080p.WEB-DL.AAC2.0.H.264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E04.Pups.Save.the.Cat.Show.1080p.WEB-DL.AAC2.0.H.264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E04.Pups.Save.the.Cat.Show.1080p.WEB-DL.AAC2.0.H.264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E04.Pups.Save.the.Cat.Show.1080p.WEB-DL.AAC2.0.H.264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E04.Pups.Save.the.Cat.Show.1080p.WEB-DL.AAC2.0.H.264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "05 - Mission Paw Quest For The Crown 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E05.Mission.Paw.Quest.For.The.Crown.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 1404.992,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E05.Mission.Paw.Quest.For.The.Crown.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E05.Mission.Paw.Quest.For.The.Crown.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E05.Mission.Paw.Quest.For.The.Crown.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E05.Mission.Paw.Quest.For.The.Crown.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E05.Mission.Paw.Quest.For.The.Crown.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "07 - Pups Save the Critters 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E07.Pups.Save.the.Critters.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 695.534,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E07.Pups.Save.the.Critters.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E07.Pups.Save.the.Critters.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E07.Pups.Save.the.Critters.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E07.Pups.Save.the.Critters.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E07.Pups.Save.the.Critters.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "08 - Mission Paw Royally Spooked 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E08.Mission.Paw.Royally.Spooked.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 709.226,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E08.Mission.Paw.Royally.Spooked.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E08.Mission.Paw.Royally.Spooked.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E08.Mission.Paw.Royally.Spooked.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E08.Mission.Paw.Royally.Spooked.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E08.Mission.Paw.Royally.Spooked.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "09 - Pups Save Monkey-dinger 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E09.Pups.Save.Monkey-dinger.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 695.111,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E09.Pups.Save.Monkey-dinger.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E09.Pups.Save.Monkey-dinger.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E09.Pups.Save.Monkey-dinger.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E09.Pups.Save.Monkey-dinger.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E09.Pups.Save.Monkey-dinger.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "10 - Pups Save Jake's Cake 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E10.Pups.Save.Jake's.Cake.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 709.226,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E10.Pups.Save.Jake's.Cake.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E10.Pups.Save.Jake's.Cake.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E10.Pups.Save.Jake's.Cake.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E10.Pups.Save.Jake's.Cake.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E10.Pups.Save.Jake's.Cake.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "11 - Pups Save a Wild Ride 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E11.Pups.Save.a.Wild.Ride.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 694.902,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E11.Pups.Save.a.Wild.Ride.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E11.Pups.Save.a.Wild.Ride.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E11.Pups.Save.a.Wild.Ride.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E11.Pups.Save.a.Wild.Ride.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E11.Pups.Save.a.Wild.Ride.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "12 - Pups Save A Sleepover 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E12.Pups.Save.A.Sleepover.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 709.056,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E12.Pups.Save.A.Sleepover.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E12.Pups.Save.A.Sleepover.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E12.Pups.Save.A.Sleepover.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E12.Pups.Save.A.Sleepover.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E12.Pups.Save.A.Sleepover.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "13 - Pups Save The Carnival 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E13.Pups.Save.The.Carnival.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 695.278,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E13.Pups.Save.The.Carnival.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E13.Pups.Save.The.Carnival.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E13.Pups.Save.The.Carnival.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E13.Pups.Save.The.Carnival.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E13.Pups.Save.The.Carnival.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "14 - Pups Save the Flying Food 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E14.Pups.Save.the.Flying.Food.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 710.336,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E14.Pups.Save.the.Flying.Food.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E14.Pups.Save.the.Flying.Food.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E14.Pups.Save.the.Flying.Food.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E14.Pups.Save.the.Flying.Food.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E14.Pups.Save.the.Flying.Food.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "15 - Pups Save a Ferris Wheel 1080p WEB-DL AAC 2 0",
+                "show": "Paw Patrol",
+                "season": "Season 4",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E15.Pups.Save.a.Ferris.Wheel.1080p.WEB-DL.AAC.2.0.H264.mkv",
+                "duration": 694.068,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E15.Pups.Save.a.Ferris.Wheel.1080p.WEB-DL.AAC.2.0.H264_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E15.Pups.Save.a.Ferris.Wheel.1080p.WEB-DL.AAC.2.0.H264_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E15.Pups.Save.a.Ferris.Wheel.1080p.WEB-DL.AAC.2.0.H264_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E15.Pups.Save.a.Ferris.Wheel.1080p.WEB-DL.AAC.2.0.H264_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E15.Pups.Save.a.Ferris.Wheel.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
+                ]
+              }
+            ]
+          },
+          "paw-patrol-season-5": {
+            "name": "Paw Patrol Season 5",
+            "path": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5",
+            "catalog": [
+              {
+                "title": "01 - Pups Save the Kitty Rescue Crew",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E01.Pups.Save.the.Kitty.Rescue.Crew.1080p.mkv",
+                "duration": 730.684,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E01.Pups.Save.the.Kitty.Rescue.Crew.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E01.Pups.Save.the.Kitty.Rescue.Crew.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E01.Pups.Save.the.Kitty.Rescue.Crew.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E01.Pups.Save.the.Kitty.Rescue.Crew.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E01.Pups.Save.the.Kitty.Rescue.Crew.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "02 - Pups Save an Ostrich",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E02.Pups.Save.an.Ostrich.1080p.mkv",
+                "duration": 731.226,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E02.Pups.Save.an.Ostrich.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E02.Pups.Save.an.Ostrich.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E02.Pups.Save.an.Ostrich.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E02.Pups.Save.an.Ostrich.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E02.Pups.Save.an.Ostrich.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "03 - Pups Save Big Paw",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E03.Pups.Save.Big.Paw.1080p.mkv",
+                "duration": 731.016,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E03.Pups.Save.Big.Paw.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E03.Pups.Save.Big.Paw.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E03.Pups.Save.Big.Paw.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E03.Pups.Save.Big.Paw.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E03.Pups.Save.Big.Paw.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "04 - Pups Save a Hum-Mover",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E04.Pups.Save.a.Hum-Mover.1080p.mkv",
+                "duration": 731.183,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E04.Pups.Save.a.Hum-Mover.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E04.Pups.Save.a.Hum-Mover.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E04.Pups.Save.a.Hum-Mover.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E04.Pups.Save.a.Hum-Mover.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E04.Pups.Save.a.Hum-Mover.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "05 - Sea Patrol Pups Save the Sunken Sloop",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E05.Sea.Patrol.Pups.Save.the.Sunken.Sloop.1080p.mkv",
+                "duration": 730.392,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E05.Sea.Patrol.Pups.Save.the.Sunken.Sloop.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E05.Sea.Patrol.Pups.Save.the.Sunken.Sloop.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E05.Sea.Patrol.Pups.Save.the.Sunken.Sloop.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E05.Sea.Patrol.Pups.Save.the.Sunken.Sloop.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E05.Sea.Patrol.Pups.Save.the.Sunken.Sloop.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "06 - Sea Patrol Pups Save a Wiggly Whale",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E06.Sea.Patrol.Pups.Save.a.Wiggly.Whale.1080p.mkv",
+                "duration": 730.517,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E06.Sea.Patrol.Pups.Save.a.Wiggly.Whale.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E06.Sea.Patrol.Pups.Save.a.Wiggly.Whale.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E06.Sea.Patrol.Pups.Save.a.Wiggly.Whale.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E06.Sea.Patrol.Pups.Save.a.Wiggly.Whale.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E06.Sea.Patrol.Pups.Save.a.Wiggly.Whale.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "07 - Pups Save a High Flying Skye",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E07.Pups.Save.a.High.Flying.Skye.1080p.mkv",
+                "duration": 730.225,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E07.Pups.Save.a.High.Flying.Skye.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E07.Pups.Save.a.High.Flying.Skye.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E07.Pups.Save.a.High.Flying.Skye.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E07.Pups.Save.a.High.Flying.Skye.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E07.Pups.Save.a.High.Flying.Skye.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "08 - Pups Go For the Gold",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E08.Pups.Go.For.the.Gold.1080p.mkv",
+                "duration": 730.267,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E08.Pups.Go.For.the.Gold.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E08.Pups.Go.For.the.Gold.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E08.Pups.Go.For.the.Gold.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E08.Pups.Go.For.the.Gold.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E08.Pups.Go.For.the.Gold.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "09 - Pups Save an Extreme Lunch",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E09.Pups.Save.an.Extreme.Lunch.1080p.mkv",
+                "duration": 730.183,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E09.Pups.Save.an.Extreme.Lunch.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E09.Pups.Save.an.Extreme.Lunch.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E09.Pups.Save.an.Extreme.Lunch.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E09.Pups.Save.an.Extreme.Lunch.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E09.Pups.Save.an.Extreme.Lunch.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "10 - Pups Save a Cat Burglar",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E10.Pups.Save.a.Cat.Burglar.1080p.mkv",
+                "duration": 730.434,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E10.Pups.Save.a.Cat.Burglar.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E10.Pups.Save.a.Cat.Burglar.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E10.Pups.Save.a.Cat.Burglar.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E10.Pups.Save.a.Cat.Burglar.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E10.Pups.Save.a.Cat.Burglar.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "11 - Sea Patrol Pups Save the Flying Diving Bell",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E11.Sea.Patrol.Pups.Save.the.Flying.Diving.Bell.1080p.mkv",
+                "duration": 730.267,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E11.Sea.Patrol.Pups.Save.the.Flying.Diving.Bell.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E11.Sea.Patrol.Pups.Save.the.Flying.Diving.Bell.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E11.Sea.Patrol.Pups.Save.the.Flying.Diving.Bell.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E11.Sea.Patrol.Pups.Save.the.Flying.Diving.Bell.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E11.Sea.Patrol.Pups.Save.the.Flying.Diving.Bell.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "12 - Sea Patrol Pups Save a Soggy Farm",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E12.Sea.Patrol.Pups.Save.a.Soggy.Farm.1080p.mkv",
+                "duration": 730.475,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E12.Sea.Patrol.Pups.Save.a.Soggy.Farm.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E12.Sea.Patrol.Pups.Save.a.Soggy.Farm.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E12.Sea.Patrol.Pups.Save.a.Soggy.Farm.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E12.Sea.Patrol.Pups.Save.a.Soggy.Farm.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E12.Sea.Patrol.Pups.Save.a.Soggy.Farm.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "13 - Pups Save a Bookmobile",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E13.Pups.Save.a.Bookmobile.1080p.mkv",
+                "duration": 730.183,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E13.Pups.Save.a.Bookmobile.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E13.Pups.Save.a.Bookmobile.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E13.Pups.Save.a.Bookmobile.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E13.Pups.Save.a.Bookmobile.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E13.Pups.Save.a.Bookmobile.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "14 - Pups Save Heady Humdinger",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E14.Pups.Save.Heady.Humdinger.1080p.mkv",
+                "duration": 730.309,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E14.Pups.Save.Heady.Humdinger.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E14.Pups.Save.Heady.Humdinger.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E14.Pups.Save.Heady.Humdinger.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E14.Pups.Save.Heady.Humdinger.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E14.Pups.Save.Heady.Humdinger.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "15 - Pups Save the Butterflies",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E15.Pups.Save.the.Butterflies.1080p.mkv",
+                "duration": 730.642,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E15.Pups.Save.the.Butterflies.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E15.Pups.Save.the.Butterflies.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E15.Pups.Save.the.Butterflies.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E15.Pups.Save.the.Butterflies.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E15.Pups.Save.the.Butterflies.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "16 - Pups Save an Underground Chicken",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E16.Pups.Save.an.Underground.Chicken.1080p.mkv",
+                "duration": 730.392,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E16.Pups.Save.an.Underground.Chicken.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E16.Pups.Save.an.Underground.Chicken.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E16.Pups.Save.an.Underground.Chicken.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E16.Pups.Save.an.Underground.Chicken.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E16.Pups.Save.an.Underground.Chicken.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "17 - Pups Save the Pirated Sea Patroller",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E17.Pups.Save.the.Pirated.Sea.Patroller.1080p.mkv",
+                "duration": 1390.467,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E17.Pups.Save.the.Pirated.Sea.Patroller.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E17.Pups.Save.the.Pirated.Sea.Patroller.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E17.Pups.Save.the.Pirated.Sea.Patroller.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E17.Pups.Save.the.Pirated.Sea.Patroller.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E17.Pups.Save.the.Pirated.Sea.Patroller.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "18 - Ultimate Rescue Pups Save the Royal Kitties",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E18.Ultimate.Rescue.Pups.Save.the.Royal.Kitties.1080p.mkv",
+                "duration": 1391.18,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E18.Ultimate.Rescue.Pups.Save.the.Royal.Kitties.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E18.Ultimate.Rescue.Pups.Save.the.Royal.Kitties.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E18.Ultimate.Rescue.Pups.Save.the.Royal.Kitties.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E18.Ultimate.Rescue.Pups.Save.the.Royal.Kitties.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E18.Ultimate.Rescue.Pups.Save.the.Royal.Kitties.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "19 - Pups Save the PawPaws",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E19.Pups.Save.the.PawPaws.1080p.mkv",
+                "duration": 730.186,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E19.Pups.Save.the.PawPaws.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E19.Pups.Save.the.PawPaws.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E19.Pups.Save.the.PawPaws.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E19.Pups.Save.the.PawPaws.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E19.Pups.Save.the.PawPaws.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "20 - Pups Save a Popped Top",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E20.Pups.Save.a.Popped.Top.1080p.mkv",
+                "duration": 730.394,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E20.Pups.Save.a.Popped.Top.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E20.Pups.Save.a.Popped.Top.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E20.Pups.Save.a.Popped.Top.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E20.Pups.Save.a.Popped.Top.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E20.Pups.Save.a.Popped.Top.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "21 - Pups Save the Snowshoeing Goodways",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E21.Pups.Save.the.Snowshoeing.Goodways.1080p.mkv",
+                "duration": 726.474,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E21.Pups.Save.the.Snowshoeing.Goodways.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E21.Pups.Save.the.Snowshoeing.Goodways.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E21.Pups.Save.the.Snowshoeing.Goodways.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E21.Pups.Save.the.Snowshoeing.Goodways.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E21.Pups.Save.the.Snowshoeing.Goodways.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "22 - Pups Save a Duck Pond",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E22.Pups.Save.a.Duck.Pond.1080p.mkv",
+                "duration": 730.561,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E22.Pups.Save.a.Duck.Pond.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E22.Pups.Save.a.Duck.Pond.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E22.Pups.Save.a.Duck.Pond.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E22.Pups.Save.a.Duck.Pond.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E22.Pups.Save.a.Duck.Pond.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "23 - Sea Patrol Pups Save Tilly Turbot",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E23.Sea.Patrol.Pups.Save.Tilly.Turbot.1080p.mkv",
+                "duration": 730.352,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E23.Sea.Patrol.Pups.Save.Tilly.Turbot.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E23.Sea.Patrol.Pups.Save.Tilly.Turbot.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E23.Sea.Patrol.Pups.Save.Tilly.Turbot.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E23.Sea.Patrol.Pups.Save.Tilly.Turbot.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E23.Sea.Patrol.Pups.Save.Tilly.Turbot.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "24 - Pups Save an Upset Elephant",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E24.Pups.Save.an.Upset.Elephant.1080p.mkv",
+                "duration": 730.311,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E24.Pups.Save.an.Upset.Elephant.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E24.Pups.Save.an.Upset.Elephant.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E24.Pups.Save.an.Upset.Elephant.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E24.Pups.Save.an.Upset.Elephant.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E24.Pups.Save.an.Upset.Elephant.1080p_stills/grid_05.jpg"
+                ]
+              },
+              {
+                "title": "25 - Ultimate Rescue Pups Save the Tigers",
+                "show": "PAW Patrol",
+                "season": "Season 5",
+                "source": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E25.Ultimate.Rescue.Pups.Save.the.Tigers.1080p.mkv",
+                "duration": 1390.512,
+                "grids": [
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E25.Ultimate.Rescue.Pups.Save.the.Tigers.1080p_stills/grid_01.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E25.Ultimate.Rescue.Pups.Save.the.Tigers.1080p_stills/grid_02.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E25.Ultimate.Rescue.Pups.Save.the.Tigers.1080p_stills/grid_03.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E25.Ultimate.Rescue.Pups.Save.the.Tigers.1080p_stills/grid_04.jpg",
+                  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E25.Ultimate.Rescue.Pups.Save.the.Tigers.1080p_stills/grid_05.jpg"
+                ]
+              }
+            ]
           }
         }
       }
     },
-    "movies": {
-      "testseries": {
-        "name": "TestSeries",
-        "path": "/private/tmp/test-library/Movies/TestSeries",
-        "movies": {
-          "testmovie": {
-            "name": "TestMovie",
-            "path": "/private/tmp/test-library/Movies/TestSeries/TestMovie",
-            "catalog": []
-          }
-        }
-      }
-    }
+    "movies": {}
   },
-  "cached_at": "2026-08-18T16:49:11.027401"
+  "cached_at": "2026-08-19T11:40:09.915933"
 }

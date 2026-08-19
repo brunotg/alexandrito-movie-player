@@ -104,5 +104,14 @@
   "/path/to/video.mp4": {
     "watched": true,
     "progress": 123.45
+  },
+  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E04.Pups.in.a.Fog.720p.mp4": {
+    "progress": 5.126019544332225
+  },
+  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E29.Pups.Fall.Festival.720p.mp4": {
+    "progress": 5.213213795666763
+  },
+  "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E01.Pups.and.the.Kitty-tastrophe.720p.mp4": {
+    "progress": 190.68226645566804
   }
 }
