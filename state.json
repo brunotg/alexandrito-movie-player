@@ -100,5 +100,9 @@
   },
   "/Users/bruno/Documents/Alexander stories/octonauts-above-and-beyond/S04/15. Gobi Desert.mkv": {
     "progress": 625.86377
+  },
+  "/path/to/video.mp4": {
+    "watched": true,
+    "progress": 123.45
   }
 }

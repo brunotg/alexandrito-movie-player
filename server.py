@@ -7,14 +7,25 @@ import os
 import re
 import tempfile
 from pathlib import Path
+from datetime import datetime
 
 from flask import Flask, abort, jsonify, render_template_string, request, send_file
 
 app = Flask(__name__)
-VIDEO_DIR: Path = None
-ABOVE_BEYOND_S03_DIR: Path = None
-ABOVE_BEYOND_S04_DIR: Path = None
+
+# Configuration for library structure
+# Directory structure: Shows/<SeriesName>/<SeasonName>/episodes or Movies/<SeriesName>/<MovieName>/files
+SHOWS_DIR: Path = None
+MOVIES_DIR: Path = None
+
+# Catalog structure: {route_path: {"dir": Path, "catalog": list[dict], ...}}
+LIBRARY_CATALOG: dict[str, dict] = {}
+
+# Route mapping: {route_id: {"type": "show" | "movie", "series": str, "season_or_movie": str, "path": Path}}
+ROUTE_MAP: dict[str, dict] = {}
+
 STATE_FILE = Path(__file__).parent / "state.json"
+CONFIG_FILE = Path(__file__).parent / "library-config.json"
 
 
 def load_state() -> dict:
@@ -38,6 +49,58 @@ def save_state(state: dict) -> None:
     except Exception:
         Path(tmp_path).unlink(missing_ok=True)
         raise
+
+
+def load_config() -> dict:
+    """Load library configuration from disk."""
+    if CONFIG_FILE.exists():
+        try:
+            return json.loads(CONFIG_FILE.read_text())
+        except json.JSONDecodeError:
+            app.logger.error("library-config.json is corrupt")
+            return {}
+    return {}
+
+
+def save_config(config: dict) -> None:
+    """Save library configuration to disk."""
+    fd, tmp_path = tempfile.mkstemp(dir=CONFIG_FILE.parent, suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w") as f:
+            f.write(json.dumps(config, indent=2, default=str))
+        Path(tmp_path).replace(CONFIG_FILE)
+    except Exception:
+        Path(tmp_path).unlink(missing_ok=True)
+        raise
+
+
+def serialize_catalog(catalog: dict) -> dict:
+    """Convert catalog with Path objects to JSON-serializable format."""
+    def serialize_obj(obj):
+        if isinstance(obj, Path):
+            return str(obj)
+        elif isinstance(obj, dict):
+            return {k: serialize_obj(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [serialize_obj(item) for item in obj]
+        return obj
+    return serialize_obj(catalog)
+
+
+def deserialize_catalog(data: dict) -> dict:
+    """Convert JSON data back to catalog format with Path objects."""
+    def deserialize_obj(obj):
+        if isinstance(obj, dict):
+            # Check if this looks like a path string
+            if "path" in obj and isinstance(obj.get("path"), str):
+                obj_copy = obj.copy()
+                obj_copy["path"] = Path(obj["path"])
+                return {k: deserialize_obj(v) for k, v in obj_copy.items()}
+            return {k: deserialize_obj(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [deserialize_obj(item) for item in obj]
+        return obj
+    return deserialize_obj(data)
 
 
 def _parse_title(stem: str) -> str:
@@ -71,6 +134,340 @@ def load_all_metadata(directory: Path) -> list[dict]:
             })
     return results
 
+
+def scan_shows_directory(shows_dir: Path) -> dict[str, dict]:
+    """
+    Scan Shows directory structure: Shows/<SeriesName>/<SeasonName>/episodes
+    Returns: {series_key: {series_name, seasons: {season_key: {season_name, path, catalog}}}}
+    """
+    catalog = {}
+    if not shows_dir or not shows_dir.is_dir():
+        return catalog
+    
+    for series_path in sorted(shows_dir.iterdir()):
+        if not series_path.is_dir():
+            continue
+        series_name = series_path.name
+        series_key = _slugify(series_name)
+        seasons = {}
+        
+        for season_path in sorted(series_path.iterdir()):
+            if not season_path.is_dir():
+                continue
+            season_name = season_path.name
+            season_key = _slugify(season_name)
+            
+            # Load catalog for this season
+            season_catalog = load_all_metadata(season_path)
+            seasons[season_key] = {
+                "name": season_name,
+                "path": season_path,
+                "catalog": season_catalog,
+            }
+        
+        if seasons:
+            catalog[series_key] = {
+                "name": series_name,
+                "path": series_path,
+                "seasons": seasons,
+            }
+    
+    return catalog
+
+
+def scan_movies_directory(movies_dir: Path) -> dict[str, dict]:
+    """
+    Scan Movies directory structure: Movies/<SeriesName>/<MovieName>/files
+    Returns: {series_key: {series_name, movies: {movie_key: {movie_name, path, catalog}}}}
+    """
+    catalog = {}
+    if not movies_dir or not movies_dir.is_dir():
+        return catalog
+    
+    for series_path in sorted(movies_dir.iterdir()):
+        if not series_path.is_dir():
+            continue
+        series_name = series_path.name
+        series_key = _slugify(series_name)
+        movies = {}
+        
+        for movie_path in sorted(series_path.iterdir()):
+            if not movie_path.is_dir():
+                continue
+            movie_name = movie_path.name
+            movie_key = _slugify(movie_name)
+            
+            # Load catalog for this movie
+            movie_catalog = load_all_metadata(movie_path)
+            movies[movie_key] = {
+                "name": movie_name,
+                "path": movie_path,
+                "catalog": movie_catalog,
+            }
+        
+        if movies:
+            catalog[series_key] = {
+                "name": series_name,
+                "path": series_path,
+                "movies": movies,
+            }
+    
+    return catalog
+
+
+def _slugify(name: str) -> str:
+    """Convert name to URL-safe slug."""
+    return name.lower().replace(" ", "-").replace("_", "-")
+
+
+def build_route_map() -> None:
+    """Build the route mapping from catalog structure."""
+    global ROUTE_MAP, LIBRARY_CATALOG
+    ROUTE_MAP.clear()
+    route_id = 0
+    
+    # Add shows routes
+    if "shows" in LIBRARY_CATALOG:
+        for series_key, series_data in LIBRARY_CATALOG["shows"].items():
+            for season_key, season_data in series_data.get("seasons", {}).items():
+                route_id += 1
+                route_path = f"shows/{series_key}/{season_key}"
+                ROUTE_MAP[route_id] = {
+                    "type": "show",
+                    "series": series_data["name"],
+                    "series_key": series_key,
+                    "season": season_data["name"],
+                    "season_key": season_key,
+                    "path": season_data["path"],
+                    "route_path": route_path,
+                }
+    
+    # Add movies routes
+    if "movies" in LIBRARY_CATALOG:
+        for series_key, series_data in LIBRARY_CATALOG["movies"].items():
+            for movie_key, movie_data in series_data.get("movies", {}).items():
+                route_id += 1
+                route_path = f"movies/{series_key}/{movie_key}"
+                ROUTE_MAP[route_id] = {
+                    "type": "movie",
+                    "series": series_data["name"],
+                    "series_key": series_key,
+                    "movie": movie_data["name"],
+                    "movie_key": movie_key,
+                    "path": movie_data["path"],
+                    "route_path": route_path,
+                }
+
+
+def get_route_info_by_path(route_path: str) -> dict | None:
+    """Get route info by path string like 'shows/series-name/season-name'."""
+    for route_data in ROUTE_MAP.values():
+        if route_data.get("route_path") == route_path:
+            return route_data
+    return None
+
+
+def get_all_allowed_dirs() -> list[Path]:
+    """Get all allowed directories for media serving."""
+    dirs = []
+    for route_data in ROUTE_MAP.values():
+        dirs.append(route_data["path"])
+    return dirs
+
+
+LIBRARY_HOME_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Library</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #8aafc5 url('/background.png') center center / cover fixed;
+      color: #e0f4ff;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #0b1e36;
+      border-bottom: 2px solid #1a4a6e;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      color: #5bc8f5;
+      flex: 1;
+      text-align: center;
+    }
+
+    .picker {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 60px 28px;
+      flex-wrap: wrap;
+    }
+
+    .series-card {
+      width: 360px;
+      background: #0d2240;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid #1a3a5c;
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: block;
+    }
+    .series-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 140, 220, 0.4);
+    }
+    .series-card-label {
+      padding: 20px 18px;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: #7a9ebb;
+      text-align: center;
+      background: #0a1a30;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MEDIA LIBRARY</h1>
+</header>
+
+<div class="picker">
+  <a class="series-card" href="/shows">
+    <div class="series-card-label">🎬 TV SHOWS</div>
+  </a>
+  <a class="series-card" href="/movies">
+    <div class="series-card-label">🎥 MOVIES</div>
+  </a>
+</div>
+
+</body>
+</html>
+"""
+
+SERIES_PICKER_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #8aafc5 url('/background.png') center center / cover fixed;
+      color: #e0f4ff;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #0b1e36;
+      border-bottom: 2px solid #1a4a6e;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      color: #5bc8f5;
+      flex: 1;
+      text-align: center;
+    }
+    .home-link {
+      background: #1a4a6e;
+      color: #a0d8f0;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .home-link:hover { background: #255f8a; }
+
+    .picker {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 60px 28px;
+      flex-wrap: wrap;
+    }
+
+    .series-card {
+      width: 360px;
+      background: #0d2240;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid #1a3a5c;
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: block;
+    }
+    .series-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 140, 220, 0.4);
+    }
+    .series-card-label {
+      padding: 14px 18px;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #7a9ebb;
+      text-align: center;
+      background: #0a1a30;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="home-link" href="{{ back_url }}">&#8592; Back</a>
+  <h1>{{ title }}</h1>
+</header>
+
+<div class="picker" id="picker"></div>
+
+<script>
+  const seriesList = {{ series_list | tojson }};
+  const picker = document.getElementById('picker');
+  
+  seriesList.forEach(item => {
+    const a = document.createElement('a');
+    a.href = item.url;
+    a.className = 'series-card';
+    a.innerHTML = '<div class="series-card-label">' + item.name + '</div>';
+    picker.appendChild(a);
+  });
+</script>
+
+</body>
+</html>
+"""
 
 ABOVE_BEYOND_PICKER_HTML = """<!DOCTYPE html>
 <html lang="en">
@@ -829,27 +1226,116 @@ HTML = """<!DOCTYPE html>
 
 @app.route("/")
 def index():
-    return render_template_string(LANDING_HTML)
+    """Library home page with shows and movies."""
+    return render_template_string(LIBRARY_HOME_HTML)
 
 
-@app.route("/octonauts")
-def octonauts():
-    return render_template_string(HTML, page_title="OCTONAUTS for ALEXANDER", api_url="/api/videos", back_url="/")
+@app.route("/shows")
+def shows_list():
+    """List all TV shows."""
+    shows = LIBRARY_CATALOG.get("shows", {})
+    series_data = [
+        {"name": series_data["name"], "key": series_key, "url": f"/shows/{series_key}"}
+        for series_key, series_data in shows.items()
+    ]
+    return render_template_string(SERIES_PICKER_HTML, 
+                                  title="TV SHOWS",
+                                  series_list=series_data,
+                                  back_url="/")
 
 
-@app.route("/above-and-beyond")
-def above_and_beyond():
-    return render_template_string(ABOVE_BEYOND_PICKER_HTML)
+@app.route("/shows/<series_key>")
+def show_seasons(series_key):
+    """List all seasons for a TV show."""
+    shows = LIBRARY_CATALOG.get("shows", {})
+    if series_key not in shows:
+        abort(404)
+    
+    series = shows[series_key]
+    seasons_data = [
+        {"name": season_data["name"], "key": season_key, "url": f"/shows/{series_key}/{season_key}"}
+        for season_key, season_data in series.get("seasons", {}).items()
+    ]
+    
+    return render_template_string(SERIES_PICKER_HTML,
+                                  title=f"{series['name'].upper()} — SEASONS",
+                                  series_list=seasons_data,
+                                  back_url="/shows")
 
 
-@app.route("/above-and-beyond/s03")
-def above_and_beyond_s03():
-    return render_template_string(HTML, page_title="ABOVE AND BEYOND — SEASON 3", api_url="/api/above-and-beyond/s03/videos", back_url="/above-and-beyond")
+@app.route("/shows/<series_key>/<season_key>")
+def show_season_videos(series_key, season_key):
+    """Display videos for a specific season."""
+    route_info = get_route_info_by_path(f"shows/{series_key}/{season_key}")
+    if not route_info:
+        abort(404)
+    
+    shows = LIBRARY_CATALOG.get("shows", {})
+    series = shows[series_key]
+    season = series["seasons"][season_key]
+    
+    page_title = f"{series['name']} — {season['name']}"
+    api_url = f"/api/shows/{series_key}/{season_key}/videos"
+    back_url = f"/shows/{series_key}"
+    
+    return render_template_string(HTML,
+                                  page_title=page_title.upper(),
+                                  api_url=api_url,
+                                  back_url=back_url)
 
 
-@app.route("/above-and-beyond/s04")
-def above_and_beyond_s04():
-    return render_template_string(HTML, page_title="ABOVE AND BEYOND — SEASON 4", api_url="/api/above-and-beyond/s04/videos", back_url="/above-and-beyond")
+@app.route("/movies")
+def movies_list():
+    """List all movie series."""
+    movies = LIBRARY_CATALOG.get("movies", {})
+    series_data = [
+        {"name": series_data["name"], "key": series_key, "url": f"/movies/{series_key}"}
+        for series_key, series_data in movies.items()
+    ]
+    return render_template_string(SERIES_PICKER_HTML,
+                                  title="MOVIES",
+                                  series_list=series_data,
+                                  back_url="/")
+
+
+@app.route("/movies/<series_key>")
+def movies_in_series(series_key):
+    """List all movies in a series."""
+    movies = LIBRARY_CATALOG.get("movies", {})
+    if series_key not in movies:
+        abort(404)
+    
+    series = movies[series_key]
+    movies_data = [
+        {"name": movie_data["name"], "key": movie_key, "url": f"/movies/{series_key}/{movie_key}"}
+        for movie_key, movie_data in series.get("movies", {}).items()
+    ]
+    
+    return render_template_string(SERIES_PICKER_HTML,
+                                  title=f"{series['name'].upper()} — MOVIES",
+                                  series_list=movies_data,
+                                  back_url="/movies")
+
+
+@app.route("/movies/<series_key>/<movie_key>")
+def movie_videos(series_key, movie_key):
+    """Display videos for a specific movie."""
+    route_info = get_route_info_by_path(f"movies/{series_key}/{movie_key}")
+    if not route_info:
+        abort(404)
+    
+    movies = LIBRARY_CATALOG.get("movies", {})
+    series = movies[series_key]
+    movie = series["movies"][movie_key]
+    
+    page_title = f"{series['name']} — {movie['name']}"
+    api_url = f"/api/movies/{series_key}/{movie_key}/videos"
+    back_url = f"/movies/{series_key}"
+    
+    return render_template_string(HTML,
+                                  page_title=page_title.upper(),
+                                  api_url=api_url,
+                                  back_url=back_url)
 
 
 @app.route("/images/<filename>")
@@ -869,23 +1355,34 @@ def background():
     return send_file(p)
 
 
-@app.route("/api/videos")
-def api_videos():
-    return jsonify(load_all_metadata(VIDEO_DIR))
+@app.route("/api/shows/<series_key>/<season_key>/videos")
+def api_show_season_videos(series_key, season_key):
+    """Get videos for a TV show season."""
+    route_info = get_route_info_by_path(f"shows/{series_key}/{season_key}")
+    if not route_info:
+        return jsonify([]), 404
+    
+    shows = LIBRARY_CATALOG.get("shows", {})
+    if series_key not in shows or season_key not in shows[series_key]["seasons"]:
+        return jsonify([]), 404
+    
+    catalog = shows[series_key]["seasons"][season_key]["catalog"]
+    return jsonify(catalog)
 
 
-@app.route("/api/above-and-beyond/s03/videos")
-def api_above_and_beyond_s03_videos():
-    if ABOVE_BEYOND_S03_DIR is None:
-        return jsonify([])
-    return jsonify(load_all_metadata(ABOVE_BEYOND_S03_DIR))
-
-
-@app.route("/api/above-and-beyond/s04/videos")
-def api_above_and_beyond_s04_videos():
-    if ABOVE_BEYOND_S04_DIR is None:
-        return jsonify([])
-    return jsonify(load_all_metadata(ABOVE_BEYOND_S04_DIR))
+@app.route("/api/movies/<series_key>/<movie_key>/videos")
+def api_movie_videos(series_key, movie_key):
+    """Get videos for a movie."""
+    route_info = get_route_info_by_path(f"movies/{series_key}/{movie_key}")
+    if not route_info:
+        return jsonify([]), 404
+    
+    movies = LIBRARY_CATALOG.get("movies", {})
+    if series_key not in movies or movie_key not in movies[series_key]["movies"]:
+        return jsonify([]), 404
+    
+    catalog = movies[series_key]["movies"][movie_key]["catalog"]
+    return jsonify(catalog)
 
 
 @app.route("/api/state")
@@ -921,11 +1418,7 @@ def api_post_state():
 def media():
     raw = request.args.get("path", "")
     p = Path(raw).resolve()
-    allowed_dirs = [VIDEO_DIR.resolve()]
-    if ABOVE_BEYOND_S03_DIR is not None:
-        allowed_dirs.append(ABOVE_BEYOND_S03_DIR.resolve())
-    if ABOVE_BEYOND_S04_DIR is not None:
-        allowed_dirs.append(ABOVE_BEYOND_S04_DIR.resolve())
+    allowed_dirs = get_all_allowed_dirs()
     if not any(str(p).startswith(str(d)) for d in allowed_dirs):
         abort(403)
     if not p.is_file():
@@ -934,43 +1427,130 @@ def media():
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Local Octonauts video player.")
+    parser = argparse.ArgumentParser(description="Local media video player.")
     parser.add_argument(
-        "directory", nargs="?",
-        default="/Users/bruno/Documents/Alexander stories/octonauts/s3",
+        "--shows",
+        default=None,
         type=Path,
-        help="Directory containing the Octonauts MP4 files and _stills folders",
+        help="Directory containing TV shows (Shows/<SeriesName>/<SeasonName>/episodes)",
     )
     parser.add_argument(
-        "--above-and-beyond-s03",
-        default="/Users/bruno/Documents/Alexander stories/octonauts-above-and-beyond/S03",
+        "--movies",
+        default=None,
         type=Path,
-        help="Directory for Above & Beyond Season 3",
+        help="Directory containing movies (Movies/<SeriesName>/<MovieName>/files)",
     )
     parser.add_argument(
-        "--above-and-beyond-s04",
-        default="/Users/bruno/Documents/Alexander stories/octonauts-above-and-beyond/S04",
-        type=Path,
-        help="Directory for Above & Beyond Season 4",
+        "--save-config",
+        action="store_true",
+        help="Save current --shows and --movies paths to config for future runs",
+    )
+    parser.add_argument(
+        "--rescan",
+        action="store_true",
+        help="Force directory rescan (ignore cached catalog)",
+    )
+    parser.add_argument(
+        "--clear-cache",
+        action="store_true",
+        help="Clear the cached catalog from disk",
     )
     parser.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
 
-    global VIDEO_DIR, ABOVE_BEYOND_S03_DIR, ABOVE_BEYOND_S04_DIR
-    VIDEO_DIR = args.directory.resolve()
-    if args.above_and_beyond_s03 and Path(args.above_and_beyond_s03).is_dir():
-        ABOVE_BEYOND_S03_DIR = Path(args.above_and_beyond_s03).resolve()
-    if args.above_and_beyond_s04 and Path(args.above_and_beyond_s04).is_dir():
-        ABOVE_BEYOND_S04_DIR = Path(args.above_and_beyond_s04).resolve()
-    if not VIDEO_DIR.is_dir():
-        print(f"Error: directory not found: {VIDEO_DIR}")
-        raise SystemExit(1)
+    global SHOWS_DIR, MOVIES_DIR, LIBRARY_CATALOG
+    
+    # Handle --clear-cache
+    if args.clear_cache:
+        if CONFIG_FILE.exists():
+            CONFIG_FILE.unlink()
+            print("Cache cleared.")
+        else:
+            print("No cache file found.")
+        return
+    
+    # Load config from disk if no arguments provided
+    if not args.shows and not args.movies:
+        config = load_config()
+        if config:
+            print(f"Loading configuration from {CONFIG_FILE}")
+            args.shows = Path(config.get("shows")) if config.get("shows") else None
+            args.movies = Path(config.get("movies")) if config.get("movies") else None
+    
+    # Validate and set directories
+    if args.shows:
+        SHOWS_DIR = args.shows.resolve()
+        if not SHOWS_DIR.is_dir():
+            print(f"Warning: Shows directory not found: {SHOWS_DIR}")
+            SHOWS_DIR = None
+    
+    if args.movies:
+        MOVIES_DIR = args.movies.resolve()
+        if not MOVIES_DIR.is_dir():
+            print(f"Warning: Movies directory not found: {MOVIES_DIR}")
+            MOVIES_DIR = None
+    
+    # Load catalogs: try cache first, then rescan if needed
+    should_rescan = args.rescan or not CONFIG_FILE.exists()
+    
+    if not should_rescan and CONFIG_FILE.exists():
+        config = load_config()
+        if config.get("catalog"):
+            print("Loading cached catalog...")
+            LIBRARY_CATALOG.update(deserialize_catalog(config.get("catalog", {})))
+        else:
+            should_rescan = True
+    
+    # If cache doesn't exist or --rescan was used, scan directories
+    if should_rescan:
+        print("Scanning directories...")
+        if SHOWS_DIR:
+            LIBRARY_CATALOG["shows"] = scan_shows_directory(SHOWS_DIR)
+        else:
+            LIBRARY_CATALOG["shows"] = {}
+        
+        if MOVIES_DIR:
+            LIBRARY_CATALOG["movies"] = scan_movies_directory(MOVIES_DIR)
+        else:
+            LIBRARY_CATALOG["movies"] = {}
+    
+    # Build route map
+    build_route_map()
+    
+    # Save config if requested or if paths are provided
+    if args.save_config or (args.shows or args.movies):
+        config = {
+            "shows": str(SHOWS_DIR) if SHOWS_DIR else None,
+            "movies": str(MOVIES_DIR) if MOVIES_DIR else None,
+            "catalog": serialize_catalog(LIBRARY_CATALOG),
+            "cached_at": datetime.now().isoformat(),
+        }
+        save_config(config)
+        print(f"Configuration saved to {CONFIG_FILE}")
 
-    print(f"Octonauts:              {VIDEO_DIR}")
-    if ABOVE_BEYOND_S03_DIR:
-        print(f"Above & Beyond S03:     {ABOVE_BEYOND_S03_DIR}")
-    if ABOVE_BEYOND_S04_DIR:
-        print(f"Above & Beyond S04:     {ABOVE_BEYOND_S04_DIR}")
+    # Print loaded content
+    if SHOWS_DIR:
+        print(f"Shows Directory:        {SHOWS_DIR}")
+        for series_key, series_data in LIBRARY_CATALOG["shows"].items():
+            print(f"  └─ {series_data['name']}")
+            for season_key, season_data in series_data.get("seasons", {}).items():
+                count = len(season_data.get("catalog", []))
+                print(f"     └─ {season_data['name']} ({count} videos)")
+    
+    if MOVIES_DIR:
+        print(f"Movies Directory:       {MOVIES_DIR}")
+        for series_key, series_data in LIBRARY_CATALOG["movies"].items():
+            print(f"  └─ {series_data['name']}")
+            for movie_key, movie_data in series_data.get("movies", {}).items():
+                count = len(movie_data.get("catalog", []))
+                print(f"     └─ {movie_data['name']} ({count} videos)")
+    
+    if not SHOWS_DIR and not MOVIES_DIR:
+        print("Warning: No Shows or Movies directories configured.")
+        print("Use --shows and/or --movies to specify directories.")
+        if CONFIG_FILE.exists():
+            print(f"Or clear cache with: python3 server.py --clear-cache")
+    
     print(f"Open http://localhost:{args.port}")
     app.run(host="0.0.0.0", port=args.port, debug=False)
 

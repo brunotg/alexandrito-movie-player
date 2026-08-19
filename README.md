@@ -1,6 +1,42 @@
 # Alexandrito Movie Player
 
-A local web video player for Alexander's Octonauts collection. Generates still previews and grid thumbnails for each episode, then serves them through a browser-based UI.
+A local web video player for managing and viewing video collections organized by TV shows and movies. Generates still previews and grid thumbnails for each video, then serves them through a browser-based UI with hierarchical navigation.
+
+---
+
+## Directory Structure
+
+The player expects directories organized in a specific hierarchy:
+
+```
+Shows/
+├── TV Show Name/
+│   ├── Season 1/
+│   │   ├── episode-1.mp4
+│   │   ├── episode-1_stills/
+│   │   │   ├── metadata.json
+│   │   │   ├── still_01.jpg
+│   │   │   └── ...
+│   │   └── ...
+│   └── Season 2/
+│       └── ...
+└── Another Show/
+    └── ...
+
+Movies/
+├── Movie Series/
+│   ├── Movie Name 1/
+│   │   ├── movie.mp4
+│   │   ├── movie_stills/
+│   │   │   ├── metadata.json
+│   │   │   ├── grid_01.jpg
+│   │   │   └── ...
+│   │   └── ...
+│   └── Movie Name 2/
+│       └── ...
+└── Standalone Movies/
+    └── ...
+```
 
 ---
 
@@ -58,21 +94,77 @@ python3 process_all.py "/path/to/video/directory/" --skip-existing
 ---
 
 ### `server.py`
-Flask web server — serves the player UI and all media files.
+Flask web server — serves the player UI and all media files with dynamic multi-directory support.
 
 ```bash
+# Initial setup: save configuration
+python3 server.py --shows /path/to/Shows --movies /path/to/Movies --save-config
+
+# Subsequent runs: load from saved config
 python3 server.py
-python3 server.py "/path/to/video/directory/" --port 8080
+
+# Force rescan of directories
+python3 server.py --rescan
+
+# Clear cached configuration
+python3 server.py --clear-cache
 ```
 
-- Default directory: `/Users/bruno/Documents/Alexander stories/octonauts/s3`
-- Default port: `8080` (port 5000 is taken by AirPlay on macOS)
-- Open `http://localhost:8080` in the browser
+**Arguments:**
+- `--shows <dir>` — directory containing TV shows organized as `Shows/<SeriesName>/<SeasonName>/episodes`
+- `--movies <dir>` — directory containing movies organized as `Movies/<SeriesName>/<MovieName>/files`
+- `--save-config` — save current `--shows` and `--movies` paths to `library-config.json` for future runs
+- `--rescan` — force directory rescanning (ignore cached catalog)
+- `--clear-cache` — delete cached configuration file
+- `--port <number>` — port to serve on (default: 8080)
+
+**Features:**
+- Loads and caches all catalogs at startup for fast navigation
+- Dynamically generates routes based on directory structure
+- URL-safe slugs for all series, seasons, and movie names
+- Hierarchical navigation: Home → Shows/Movies → Series → Seasons/Movies → Videos
+- **Configuration persistence**: saves paths and catalogs to `library-config.json` for no-argument startup
+- **Fast startup**: uses cached catalog on subsequent runs (rescan with `--rescan`)
 
 **Routes:**
-- `GET /` — the single-page player UI
-- `GET /api/videos` — JSON list of all episodes with title, source, stills, and grids
-- `GET /media?path=<absolute_path>` — serves any file within the video directory (403 if outside)
+- `GET /` — library home with TV shows and movies options
+- `GET /shows` — list all TV shows
+- `GET /shows/<series_key>` — list seasons for a show
+- `GET /shows/<series_key>/<season_key>` — watch videos for a season
+- `GET /movies` — list all movie series
+- `GET /movies/<series_key>` — list movies in a series
+- `GET /movies/<series_key>/<movie_key>` — watch a specific movie
+- `GET /api/shows/<series_key>/<season_key>/videos` — JSON list of season videos
+- `GET /api/movies/<series_key>/<movie_key>/videos` — JSON list of movie videos
+- `GET /api/state` — get/post viewing progress for all videos
+- `GET /media?path=<absolute_path>` — serves video files and stills (403 if outside allowed dirs)
+
+**Example:**
+```bash
+# First time: set up and save configuration
+python3 server.py \
+  --shows ~/Videos/Shows \
+  --movies ~/Videos/Movies \
+  --save-config \
+  --port 8080
+
+# Future runs: just load from saved config
+python3 server.py
+# or with different port:
+python3 server.py --port 9000
+
+# Update paths and save new config
+python3 server.py --shows /new/shows/path --save-config
+
+# Force rescan of directories
+python3 server.py --rescan
+
+# Clear all configuration
+python3 server.py --clear-cache
+```
+
+**Configuration file** (`library-config.json`):
+Automatically created by `--save-config`. Contains paths and cached catalog data for fast startup.
 
 **Dependencies:** `flask`
 

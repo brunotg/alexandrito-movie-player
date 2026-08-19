@@ -1,0 +1,33 @@
+{
+  "shows": "/private/tmp/test-library/Shows",
+  "movies": "/private/tmp/test-library/Movies",
+  "catalog": {
+    "shows": {
+      "octonauts": {
+        "name": "Octonauts",
+        "path": "/private/tmp/test-library/Shows/Octonauts",
+        "seasons": {
+          "season-1": {
+            "name": "Season 1",
+            "path": "/private/tmp/test-library/Shows/Octonauts/Season 1",
+            "catalog": []
+          }
+        }
+      }
+    },
+    "movies": {
+      "testseries": {
+        "name": "TestSeries",
+        "path": "/private/tmp/test-library/Movies/TestSeries",
+        "movies": {
+          "testmovie": {
+            "name": "TestMovie",
+            "path": "/private/tmp/test-library/Movies/TestSeries/TestMovie",
+            "catalog": []
+          }
+        }
+      }
+    }
+  },
+  "cached_at": "2026-08-18T16:49:11.027401"
+}
