@@ -24,8 +24,13 @@ LIBRARY_CATALOG: dict[str, dict] = {}
 # Route mapping: {route_id: {"type": "show" | "movie", "series": str, "season_or_movie": str, "path": Path}}
 ROUTE_MAP: dict[str, dict] = {}
 
+# Flat index of every known video: {source_path: {title, source, grids, duration, collection, route_path}}
+# Built from the catalog at startup so the queue can span shows and movies.
+VIDEO_INDEX: dict[str, dict] = {}
+
 STATE_FILE = Path(__file__).parent / "state.json"
 CONFIG_FILE = Path(__file__).parent / "library-config.json"
+QUEUE_FILE = Path(__file__).parent / "queue.json"
 TRANSITION_TIMER_FILE = Path(__file__).parent / "parrot_transition_timer.html"
 
 
@@ -47,6 +52,32 @@ def save_state(state: dict) -> None:
         with os.fdopen(fd, "w") as f:
             f.write(json.dumps(state, indent=2))
         Path(tmp_path).replace(STATE_FILE)
+    except Exception:
+        Path(tmp_path).unlink(missing_ok=True)
+        raise
+
+
+def load_queue() -> list[str]:
+    """Load the play queue (a list of source paths) from disk."""
+    if QUEUE_FILE.exists():
+        text = QUEUE_FILE.read_text().strip()
+        if text:
+            try:
+                data = json.loads(text)
+            except json.JSONDecodeError:
+                app.logger.error("queue.json is corrupt, resetting to empty queue")
+                return []
+            if isinstance(data, list):
+                return [item for item in data if isinstance(item, str)]
+    return []
+
+
+def save_queue(queue: list[str]) -> None:
+    fd, tmp_path = tempfile.mkstemp(dir=QUEUE_FILE.parent, suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w") as f:
+            f.write(json.dumps(queue, indent=2))
+        Path(tmp_path).replace(QUEUE_FILE)
     except Exception:
         Path(tmp_path).unlink(missing_ok=True)
         raise
@@ -244,10 +275,27 @@ def _slugify(name: str) -> str:
     return name.lower().replace(" ", "-").replace("_", "-")
 
 
+def _index_videos(catalog: list[dict], collection: str, route_path: str) -> None:
+    """Add every video in a catalog to VIDEO_INDEX, tagged with where it came from."""
+    for video in catalog:
+        source = video.get("source")
+        if not source:
+            continue
+        VIDEO_INDEX[source] = {
+            "title": video.get("title", Path(source).stem),
+            "source": source,
+            "grids": video.get("grids", []),
+            "duration": video.get("duration"),
+            "collection": collection,
+            "route_path": route_path,
+        }
+
+
 def build_route_map() -> None:
-    """Build the route mapping from catalog structure."""
+    """Build the route mapping and the flat video index from the catalog structure."""
     global ROUTE_MAP, LIBRARY_CATALOG
     ROUTE_MAP.clear()
+    VIDEO_INDEX.clear()
     route_id = 0
     
     # Add shows routes
@@ -265,6 +313,11 @@ def build_route_map() -> None:
                     "path": season_data["path"],
                     "route_path": route_path,
                 }
+                _index_videos(
+                    season_data.get("catalog", []),
+                    f"{series_data['name']} \u00b7 {season_data['name']}",
+                    route_path,
+                )
     
     # Add movies routes
     if "movies" in LIBRARY_CATALOG:
@@ -281,6 +334,11 @@ def build_route_map() -> None:
                     "path": movie_data["path"],
                     "route_path": route_path,
                 }
+                _index_videos(
+                    movie_data.get("catalog", []),
+                    f"{series_data['name']} \u00b7 {movie_data['name']}",
+                    route_path,
+                )
 
 
 def get_route_info_by_path(route_path: str) -> dict | None:
@@ -976,6 +1034,220 @@ HTML = """<!DOCTYPE html>
       border-radius: 10px;
       display: block;
     }
+    .player-stage { position: relative; }
+
+    /* ── Up next overlay ──────────────────────────────── */
+    #up-next {
+      display: none;
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: min(340px, calc(100% - 36px));
+      background: rgba(8, 24, 44, 0.94);
+      border: 1px solid #1a4a6e;
+      border-radius: 12px;
+      padding: 16px 18px;
+      z-index: 5;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+    #up-next .up-next-label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      color: #4a8fb8;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    #up-next .up-next-title {
+      font-size: 1rem;
+      color: #e0f4ff;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+    #up-next .up-next-collection {
+      font-size: 0.78rem;
+      color: #7a9ebb;
+      margin-bottom: 12px;
+    }
+    .up-next-actions { display: flex; gap: 10px; }
+    #up-next-play {
+      flex: 1;
+      background: #1278c4;
+      border: none;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+    #up-next-play:hover { background: #1a94e8; }
+    #up-next-cancel {
+      background: #1a4a6e;
+      border: none;
+      color: #a0d8f0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+    #up-next-cancel:hover { background: #255f8a; }
+
+    /* ── Queue drawer ─────────────────────────────────── */
+    #queue-btn {
+      background: #1a4a6e;
+      border: none;
+      color: #a0d8f0;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    #queue-btn:hover { background: #255f8a; }
+    #queue-btn.has-items { background: #1278c4; color: #fff; }
+
+    #queue-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(360px, 100%);
+      height: 100%;
+      background: #0b1e36;
+      border-left: 2px solid #1a4a6e;
+      z-index: 20;
+      transform: translateX(100%);
+      transition: transform 0.22s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    #queue-panel.open { transform: translateX(0); }
+    .queue-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid #1a3a5c;
+    }
+    .queue-header h2 { font-size: 1rem; color: #5bc8f5; letter-spacing: 2px; flex: 1; }
+    .queue-close {
+      background: none;
+      border: none;
+      color: #7a9ebb;
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .queue-close:hover { color: #e0f4ff; }
+    #queue-list { flex: 1; overflow-y: auto; padding: 10px 12px; }
+    .queue-empty { color: #4a6a88; font-size: 0.85rem; padding: 24px 8px; text-align: center; line-height: 1.6; }
+    .queue-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0d2240;
+      border: 1px solid #1a3a5c;
+      border-radius: 8px;
+      padding: 9px 10px;
+      margin-bottom: 8px;
+    }
+    .queue-item.up-next-item { border-color: #1278c4; }
+    .queue-pos {
+      color: #4a8fb8;
+      font-size: 0.78rem;
+      width: 18px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .queue-info { flex: 1; min-width: 0; }
+    .queue-title {
+      font-size: 0.85rem;
+      color: #cfe8f8;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .queue-collection { font-size: 0.72rem; color: #4a6a88; margin-top: 2px; }
+    .queue-actions { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
+    .queue-actions button {
+      background: none;
+      border: none;
+      color: #4a8fb8;
+      cursor: pointer;
+      font-size: 0.8rem;
+      line-height: 1;
+      padding: 2px 4px;
+    }
+    .queue-actions button:hover:not(:disabled) { color: #5bc8f5; }
+    .queue-actions button:disabled { opacity: 0.2; cursor: default; }
+    .queue-remove { color: #b06a6a !important; }
+    .queue-remove:hover { color: #e08080 !important; }
+    .queue-footer {
+      display: flex;
+      gap: 10px;
+      padding: 14px 18px;
+      border-top: 1px solid #1a3a5c;
+    }
+    #queue-play {
+      flex: 1;
+      background: #1278c4;
+      border: none;
+      color: #fff;
+      padding: 11px 14px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    #queue-play:hover:not(:disabled) { background: #1a94e8; }
+    #queue-play:disabled { opacity: 0.35; cursor: default; }
+    #queue-clear {
+      background: #2a1a1a;
+      border: 1px solid #6e2a2a;
+      color: #e08080;
+      padding: 11px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    #queue-clear:hover:not(:disabled) { background: #3d1f1f; }
+    #queue-clear:disabled { opacity: 0.35; cursor: default; }
+
+    /* add-to-queue control on library cards */
+    .card-queue-btn {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid #2a5a80;
+      color: #a0d8f0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.15s, color 0.15s;
+    }
+    .card-queue-btn:hover { background: #1278c4; color: #fff; }
+    .card-queue-btn.queued { background: #1278c4; color: #fff; border-color: #1278c4; }
+    #btn-queue {
+      background: #1a4a6e;
+      border: none;
+      color: #a0d8f0;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #btn-queue:hover { background: #255f8a; }
+    #btn-queue.queued { background: #1278c4; color: #fff; }
   </style>
 </head>
 <body>
@@ -984,7 +1256,20 @@ HTML = """<!DOCTYPE html>
   <a class="home-link" href="{{ back_url }}">&#8592; Back</a>
   <button id="back-btn" onclick="goBack()">&#8592; Back</button>
   <h1>{{ page_title }}</h1>
+  <button id="queue-btn" onclick="toggleQueue()">&#9776; Queue <span id="queue-count">0</span></button>
 </header>
+
+<div id="queue-panel">
+  <div class="queue-header">
+    <h2>UP NEXT</h2>
+    <button class="queue-close" onclick="toggleQueue()" title="Close">&#10007;</button>
+  </div>
+  <div id="queue-list"></div>
+  <div class="queue-footer">
+    <button id="queue-play" onclick="playQueue()">&#9654;&nbsp; Play queue</button>
+    <button id="queue-clear" onclick="clearQueue()">Clear</button>
+  </div>
+</div>
 
 <div id="loading">Loading library&hellip;</div>
 <div id="library"   style="display:none;"></div>
@@ -1004,7 +1289,18 @@ HTML = """<!DOCTYPE html>
 
 <div id="player">
   <div id="player-title"></div>
-  <video id="video-el" controls></video>
+  <div class="player-stage">
+    <video id="video-el" controls></video>
+    <div id="up-next">
+      <div class="up-next-label">Up next in <span id="up-next-countdown">8</span>s</div>
+      <div class="up-next-title" id="up-next-title"></div>
+      <div class="up-next-collection" id="up-next-collection"></div>
+      <div class="up-next-actions">
+        <button id="up-next-play" onclick="playUpNext()">&#9654;&nbsp; Play now</button>
+        <button id="up-next-cancel" onclick="cancelUpNext()">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1013,6 +1309,12 @@ HTML = """<!DOCTYPE html>
   let slideIndex = 0;
   let view = 'library';   // 'library' | 'slideshow' | 'player'
   let state = {};          // { [source]: { progress?, watched? } }
+  let queue = [];          // [{ title, source, grids, duration, collection }] - persisted server-side
+  let upNext = null;       // video queued to auto-play once the current one ends
+  let upNextTimer = null;
+  let lastSave = 0;        // last progress checkpoint for the video now playing
+
+  const UP_NEXT_SECONDS = 8;
 
   // ── helpers ──────────────────────────────────────────
   function escHtml(s) {
@@ -1053,13 +1355,106 @@ HTML = """<!DOCTYPE html>
   }
   function isWatched(v) { return !!(state[v.source]?.watched); }
 
+  // ── queue helpers ─────────────────────────────────────
+  // The server owns the persisted queue; PUT replaces it wholesale, which
+  // covers append, remove, reorder and clear with a single endpoint.
+  async function saveQueue() {
+    const res = await fetch('/api/queue', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sources: queue.map(q => q.source) }),
+    });
+    queue = await res.json();
+    renderQueue();
+    renderLibrary();
+  }
+
+  function isQueued(v) { return queue.some(q => q.source === v.source); }
+
+  function renderQueue() {
+    const count = document.getElementById('queue-count');
+    const btn   = document.getElementById('queue-btn');
+    count.textContent = queue.length;
+    btn.classList.toggle('has-items', queue.length > 0);
+
+    document.getElementById('queue-play').disabled  = queue.length === 0;
+    document.getElementById('queue-clear').disabled = queue.length === 0;
+
+    const list = document.getElementById('queue-list');
+    if (queue.length === 0) {
+      list.innerHTML = '<div class="queue-empty">Nothing queued yet.<br>Use the &#43; on any episode to add it here.</div>';
+      return;
+    }
+    list.innerHTML = queue.map((q, i) => `
+      <div class="queue-item ${i === 0 ? 'up-next-item' : ''}">
+        <div class="queue-pos">${i + 1}</div>
+        <div class="queue-info">
+          <div class="queue-title">${escHtml(q.title)}</div>
+          <div class="queue-collection">${escHtml(q.collection || '')}</div>
+        </div>
+        <div class="queue-actions">
+          <button onclick="moveInQueue(${i}, -1)" ${i === 0 ? 'disabled' : ''} title="Move up">&#9650;</button>
+          <button onclick="moveInQueue(${i}, 1)" ${i === queue.length - 1 ? 'disabled' : ''} title="Move down">&#9660;</button>
+          <button class="queue-remove" onclick="removeFromQueue(${i})" title="Remove">&#10007;</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function toggleQueue() {
+    document.getElementById('queue-panel').classList.toggle('open');
+  }
+
+  function toggleQueueItem(i) {
+    const v = videos[i];
+    if (isQueued(v)) queue = queue.filter(q => q.source !== v.source);
+    else             queue.push(v);
+    saveQueue();
+  }
+
+  function toggleQueueCurrent() {
+    if (isQueued(currentVideo)) queue = queue.filter(q => q.source !== currentVideo.source);
+    else                        queue.push(currentVideo);
+    saveQueue();
+    renderPlayButtons();
+  }
+
+  function removeFromQueue(i) {
+    queue.splice(i, 1);
+    saveQueue();
+  }
+
+  function moveInQueue(i, delta) {
+    const j = i + delta;
+    if (j < 0 || j >= queue.length) return;
+    [queue[i], queue[j]] = [queue[j], queue[i]];
+    saveQueue();
+  }
+
+  function clearQueue() {
+    queue = [];
+    saveQueue();
+  }
+
+  function playQueue() {
+    if (queue.length === 0) return;
+    const next = queue.shift();
+    saveQueue();
+    document.getElementById('queue-panel').classList.remove('open');
+    playVideo(next, true);
+  }
+
   // ── load ─────────────────────────────────────────────
   const API_URL = '{{ api_url }}';
 
   async function loadVideos() {
-    const [videosRes, stateRes] = await Promise.all([fetch(API_URL), fetch('/api/state')]);
+    const [videosRes, stateRes, queueRes] = await Promise.all([
+      fetch(API_URL), fetch('/api/state'), fetch('/api/queue'),
+    ]);
     videos = await videosRes.json();
     state  = await stateRes.json();
+    queue  = await queueRes.json();
+    renderQueue();
     renderLibrary();
     hide('loading');
     show('library', 'grid');
@@ -1097,8 +1492,14 @@ HTML = """<!DOCTYPE html>
       const thumb = thumbSrc
         ? `<img src="/media?path=${encodeURIComponent(thumbSrc)}" alt="${escHtml(v.title)}" loading="lazy">`
         : `<div class="card-no-thumb">${escHtml(v.title)}</div>`;
+      const queued   = isQueued(v);
+      const queueBtn = `<button class="card-queue-btn ${queued ? 'queued' : ''}"
+            onclick="event.stopPropagation(); toggleQueueItem(${i})"
+            title="${queued ? 'Remove from queue' : 'Add to queue'}">${queued ? '&#10003;' : '&#43;'}</button>`;
+
       return `
         <div class="card" onclick="openSlideshow(${i})">
+          ${queueBtn}
           ${badge}
           ${thumb}
           ${progressBar}
@@ -1113,6 +1514,13 @@ HTML = """<!DOCTYPE html>
   }
 
   // ── slideshow ─────────────────────────────────────────
+  function queueButtonHtml() {
+    const queued = isQueued(currentVideo);
+    return `<button id="btn-queue" class="${queued ? 'queued' : ''}" onclick="toggleQueueCurrent()">`
+      + (queued ? '&#10003; Queued' : '&#43; Add to queue')
+      + '</button>';
+  }
+
   function renderPlayButtons() {
     const saved   = loadProgress(currentVideo);
     const watched = isWatched(currentVideo);
@@ -1127,10 +1535,14 @@ HTML = """<!DOCTYPE html>
       row.innerHTML = `
         <button id="play-btn" onclick="startPlayer(false)">${label}</button>
         <button id="btn-restart" onclick="startPlayer(true)">&#8635; Start over</button>
+        ${queueButtonHtml()}
         ${unwatchedBtn}
       `;
     } else {
-      row.innerHTML = `<button id="play-btn" onclick="startPlayer(false)">&#9654;&nbsp; Play</button>`;
+      row.innerHTML = `
+        <button id="play-btn" onclick="startPlayer(false)">&#9654;&nbsp; Play</button>
+        ${queueButtonHtml()}
+      `;
     }
   }
 
@@ -1181,6 +1593,11 @@ HTML = """<!DOCTYPE html>
 
   // keyboard arrow support
   document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.getElementById('queue-panel').classList.remove('open');
+      if (upNextTimer) cancelUpNext();
+      return;
+    }
     if (view === 'slideshow') {
       if (e.key === 'ArrowLeft')  prevSlide();
       if (e.key === 'ArrowRight') nextSlide();
@@ -1189,48 +1606,123 @@ HTML = """<!DOCTYPE html>
 
   // ── player ───────────────────────────────────────────
   function startPlayer(fromBeginning = false) {
-    const v = currentVideo;
+    playVideo(currentVideo, fromBeginning);
+  }
+
+  // Handlers are assigned as properties rather than added as listeners: the
+  // same <video> element is reused for every episode, so addEventListener
+  // would stack a fresh copy of each handler on every play.
+  function playVideo(v, fromBeginning = false) {
+    cancelUpNext();
+    currentVideo = v;
+    slideIndex = 0;
+    document.getElementById('slideshow-title').textContent = v.title;
     document.getElementById('player-title').textContent = v.title;
+
     const vid = document.getElementById('video-el');
     vid.src = `/media?path=${encodeURIComponent(v.source)}`;
     vid.load();
+    lastSave = 0;
 
-    vid.addEventListener('loadedmetadata', () => {
+    vid.onloadedmetadata = () => {
       if (!fromBeginning) {
         const saved = loadProgress(v);
         if (saved > 5) vid.currentTime = saved;
       }
       vid.play();
-    }, { once: true });
+    };
 
-    let lastSave = 0;
-    vid.addEventListener('timeupdate', () => {
+    vid.ontimeupdate = () => {
       if (vid.currentTime - lastSave >= 5) {
         saveProgress(v, vid.currentTime);
         lastSave = vid.currentTime;
       }
-    });
+    };
 
-    vid.addEventListener('ended', () => {
+    vid.onplay = () => { if (upNextTimer) cancelUpNext(); };
+
+    vid.onended = () => {
       clearProgress(v);
       markWatched(v);
       renderLibrary();
-    });
+      const next = pickNext(v);
+      if (next) showUpNext(next);
+    };
 
     hide('slideshow');
+    hide('library');
+    show('back-btn');
     show('player');
     view = 'player';
+  }
+
+  // What plays when the current video ends: the queue first, otherwise the
+  // next episode in the collection being browsed.
+  function pickNext(v) {
+    if (queue.length > 0) return queue[0];
+    const i = videos.findIndex(x => x.source === v.source);
+    if (i >= 0 && i + 1 < videos.length) return videos[i + 1];
+    return null;
+  }
+
+  function showUpNext(next) {
+    upNext = next;
+    document.getElementById('up-next-title').textContent = next.title;
+    document.getElementById('up-next-collection').textContent = next.collection || '';
+
+    let remaining = UP_NEXT_SECONDS;
+    document.getElementById('up-next-countdown').textContent = remaining;
+    show('up-next');
+
+    upNextTimer = setInterval(() => {
+      remaining -= 1;
+      document.getElementById('up-next-countdown').textContent = Math.max(0, remaining);
+      if (remaining <= 0) playUpNext();
+    }, 1000);
+  }
+
+  function playUpNext() {
+    const next = upNext;
+    cancelUpNext();
+    if (!next) return;
+    // If it came off the queue, consume it before playing.
+    if (queue.length > 0 && queue[0].source === next.source) {
+      queue.shift();
+      saveQueue();
+    }
+    playVideo(next, true);
+  }
+
+  function cancelUpNext() {
+    if (upNextTimer) clearInterval(upNextTimer);
+    upNextTimer = null;
+    upNext = null;
+    hide('up-next');
+    document.getElementById('up-next-title').textContent = '';
+    document.getElementById('up-next-collection').textContent = '';
   }
 
   // ── navigation ───────────────────────────────────────
   function goBack() {
     if (view === 'player') {
+      cancelUpNext();
       const vid = document.getElementById('video-el');
       vid.pause();
       vid.src = '';
       hide('player');
+      // A queued video from another collection may have no slideshow to
+      // return to, so fall through to the library instead.
+      if (!currentVideo.grids || currentVideo.grids.length === 0) {
+        renderLibrary();
+        show('library', 'grid');
+        hide('back-btn');
+        view = 'library';
+        return;
+      }
+      setSlide(null);
       renderPlayButtons();
       show('slideshow', 'flex');
+      show('back-btn');
       view = 'slideshow';
     } else if (view === 'slideshow') {
       hide('slideshow');
@@ -1444,6 +1936,49 @@ def api_post_state():
         state.pop(source, None)
     save_state(state)
     return jsonify({"ok": True})
+
+
+def hydrate_queue(queue: list[str]) -> list[dict]:
+    """Turn stored source paths into full video objects, dropping anything unknown."""
+    return [VIDEO_INDEX[source] for source in queue if source in VIDEO_INDEX]
+
+
+@app.route("/api/queue")
+def api_get_queue():
+    """Return the persisted queue as full video objects.
+
+    Sources that no longer exist in the catalog (moved or removed media) are
+    pruned from disk so the queue does not accumulate dead entries.
+    """
+    queue = load_queue()
+    live = [source for source in queue if source in VIDEO_INDEX]
+    if live != queue:
+        save_queue(live)
+    return jsonify(hydrate_queue(live))
+
+
+@app.route("/api/queue", methods=["PUT"])
+def api_put_queue():
+    """Replace the whole queue. Body: {"sources": [path, ...]}.
+
+    A full replace covers append, remove, reorder and clear with one endpoint.
+    Unknown sources are rejected so only real catalog entries reach disk.
+    """
+    body = request.get_json(force=True)
+    sources = body.get("sources")
+    if not isinstance(sources, list):
+        abort(400)
+
+    seen = set()
+    queue = []
+    for source in sources:
+        if not isinstance(source, str) or source not in VIDEO_INDEX or source in seen:
+            continue
+        seen.add(source)
+        queue.append(source)
+
+    save_queue(queue)
+    return jsonify(hydrate_queue(queue))
 
 
 @app.route("/media")

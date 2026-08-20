@@ -125,6 +125,7 @@ python3 server.py --clear-cache
 - Hierarchical navigation: Home → Shows/Movies → Series → Seasons/Movies → Videos
 - **Configuration persistence**: saves paths and catalogs to `library-config.json` for no-argument startup
 - **Fast startup**: uses cached catalog on subsequent runs (rescan with `--rescan`)
+- **Play queue**: build a watch list that spans shows and movies; plays through it automatically
 
 **Routes:**
 - `GET /` — library home with TV shows and movies options
@@ -137,6 +138,8 @@ python3 server.py --clear-cache
 - `GET /api/shows/<series_key>/<season_key>/videos` — JSON list of season videos
 - `GET /api/movies/<series_key>/<movie_key>/videos` — JSON list of movie videos
 - `GET /api/state` — get/post viewing progress for all videos
+- `GET /api/queue` — the play queue as full video objects (dead entries pruned)
+- `PUT /api/queue` — replace the queue; body `{"sources": [path, ...]}`
 - `GET /media?path=<absolute_path>` — serves video files and stills (403 if outside allowed dirs)
 
 **Example:**
@@ -166,6 +169,10 @@ python3 server.py --clear-cache
 **Configuration file** (`library-config.json`):
 Automatically created by `--save-config`. Contains paths and cached catalog data for fast startup.
 
+**Runtime state files** (created automatically, not part of configuration):
+- `state.json` — per-video watch progress and watched flags, keyed by absolute path
+- `queue.json` — the play queue, stored as an ordered list of absolute source paths
+
 **Dependencies:** `flask`
 
 ---
@@ -183,6 +190,22 @@ Library (grid of episode cards)
 - **Library:** shows `still_01.jpg` (the title card) for each episode
 - **Slideshow:** shows the 5 grid composites (not individual stills) with slide-in animation
 - **Player:** native HTML5 `<video>` element, full controls
+
+### Queue playback
+
+A queue can hold videos from any collection — episodes from different seasons and
+movies can sit in the same list.
+
+- **Add:** the `+` button on any library card, or **Add to queue** on the slideshow
+- **Manage:** the **Queue** button in the header opens a drawer to reorder (▲▼),
+  remove (✗), clear, or start playing the queue
+- **Auto-advance:** when a video ends, an *Up next* card appears over the player with
+  an 8-second countdown, plus **Play now** and **Cancel**. The queue is consumed
+  first; when it is empty, the next episode in the current collection plays instead.
+  If neither exists, playback simply stops.
+- **Persistence:** the queue lives in `queue.json` and survives reloads, navigation
+  between collections, and server restarts. Entries whose media no longer exists are
+  dropped on the next startup.
 
 ---
 
@@ -213,6 +236,10 @@ octonauts/s3/
 | Server port | 8080 | Port 5000 is occupied by AirPlay (AirTunes) on macOS |
 | File serving security | Path must start with `VIDEO_DIR.resolve()` | Prevents path traversal; app is local-only but still scoped |
 | Back navigation | Per-level (player → slideshow → library) | Preserves context instead of dropping user to library |
+| Queue storage | Ordered list of source paths in `queue.json` | Paths are the existing identity for a video (same key as `state.json`); titles stay fresh because the server rehydrates from the catalog |
+| Queue API | Single `PUT` that replaces the whole list | Covers append, remove, reorder and clear without four endpoints |
+| Auto-advance | 8s countdown with Play now / Cancel | Instant cuts are jarring, and a countdown gives a chance to stop after each episode |
+| Video event handlers | Assigned as `on*` properties, not `addEventListener` | The one `<video>` element is reused for every episode; listeners would otherwise stack up on each play |
 
 ---
 
