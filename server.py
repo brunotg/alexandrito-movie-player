@@ -167,6 +167,28 @@ def load_all_metadata(directory: Path) -> list[dict]:
     return results
 
 
+POSTER_EXTENSIONS = (".webp", ".jpg", ".jpeg", ".png")
+
+
+def find_poster(directory: Path) -> str | None:
+    """Find a poster image sitting alongside the episodes.
+
+    Matches any image whose name contains "poster", e.g.
+    paw_patrol_season_1_poster.webp. Returned as a string so a freshly scanned
+    catalog and one loaded from the config cache hold the same type.
+    """
+    if not directory.is_dir():
+        return None
+    for candidate in sorted(directory.iterdir()):
+        if (
+            candidate.is_file()
+            and "poster" in candidate.stem.lower()
+            and candidate.suffix.lower() in POSTER_EXTENSIONS
+        ):
+            return str(candidate.resolve())
+    return None
+
+
 def scan_shows_directory(shows_dir: Path) -> dict[str, dict]:
     """
     Scan Shows directory structure: Shows/<SeriesName>/<SeasonName>/episodes
@@ -190,6 +212,7 @@ def scan_shows_directory(shows_dir: Path) -> dict[str, dict]:
           "name": season_name,
           "path": season_path,
           "catalog": load_all_metadata(season_path),
+          "poster": find_poster(season_path),
         }
       return {
         series_key: {
@@ -218,6 +241,7 @@ def scan_shows_directory(shows_dir: Path) -> dict[str, dict]:
                 "name": season_name,
                 "path": season_path,
                 "catalog": season_catalog,
+                "poster": find_poster(season_path),
             }
         
         if seasons:
@@ -523,6 +547,18 @@ SERIES_PICKER_HTML = """<!DOCTYPE html>
       align-items: center;
       justify-content: center;
     }
+    /* Posters vary between 2:3 and 4:5, so they are contained rather than
+       cropped: cards stay a uniform size and no artwork is cut off. */
+    .series-card-poster {
+      width: 100%;
+      display: block;
+      aspect-ratio: 2 / 3;
+      object-fit: contain;
+      background: #081626;
+      filter: brightness(0.88);
+      transition: filter 0.18s;
+    }
+    .series-card:hover .series-card-poster { filter: brightness(1); }
   </style>
 </head>
 <body>
@@ -542,7 +578,21 @@ SERIES_PICKER_HTML = """<!DOCTYPE html>
     const a = document.createElement('a');
     a.href = item.url;
     a.className = 'series-card';
-    a.innerHTML = '<div class="series-card-label">' + item.name + '</div>';
+
+    if (item.poster) {
+      const img = document.createElement('img');
+      img.className = 'series-card-poster';
+      img.src = '/media?path=' + encodeURIComponent(item.poster);
+      img.alt = item.name;
+      img.loading = 'lazy';
+      a.appendChild(img);
+    }
+
+    const label = document.createElement('div');
+    label.className = 'series-card-label';
+    label.textContent = item.name;
+    a.appendChild(label);
+
     picker.appendChild(a);
   });
 </script>
@@ -900,6 +950,12 @@ HTML = """<!DOCTYPE html>
       display: flex; align-items: center; justify-content: center;
     }
     .card-watched-label { font-size: 0.75rem; color: #4cdf80; padding: 2px 14px 10px; }
+    .card-play-count {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #4cdf80;
+      letter-spacing: 0;
+    }
 
     /* ── Slideshow ────────────────────────────────────── */
     #slideshow {
@@ -914,8 +970,16 @@ HTML = """<!DOCTYPE html>
       font-size: 1.15rem;
       color: #5bc8f5;
       letter-spacing: 1px;
-      margin-bottom: 18px;
+      margin-bottom: 6px;
       text-align: center;
+    }
+    #slideshow-meta {
+      font-size: 0.82rem;
+      color: #4cdf80;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      text-align: center;
+      min-height: 1em;
     }
     .slide-stage {
       position: relative;
@@ -1276,6 +1340,7 @@ HTML = """<!DOCTYPE html>
 
 <div id="slideshow">
   <div id="slideshow-title"></div>
+  <div id="slideshow-meta"></div>
   <div class="slide-stage">
     <button class="slide-arrow" id="arrow-prev" onclick="prevSlide()">&#8592;</button>
     <img id="slide-img" src="" alt="">
@@ -1341,19 +1406,46 @@ HTML = """<!DOCTYPE html>
     postState(v.source, { progress: t });
   }
   function loadProgress(v)  { return state[v.source]?.progress || 0; }
-  function clearProgress(v) {
-    if (state[v.source]) delete state[v.source].progress;
-    postState(v.source, { progress: null });
-  }
-  function markWatched(v) {
-    (state[v.source] = state[v.source] || {}).watched = true;
-    postState(v.source, { watched: true });
-  }
-  function clearWatched(v) {
-    if (state[v.source]) delete state[v.source].watched;
-    postState(v.source, { watched: false });
-  }
   function isWatched(v) { return !!(state[v.source]?.watched); }
+
+  // Videos finished before the counter existed have no `plays` field but are
+  // flagged watched, so they count as one.
+  function playCount(v) {
+    const entry = state[v.source];
+    if (!entry) return 0;
+    if (entry.plays != null) return entry.plays;
+    return entry.watched ? 1 : 0;
+  }
+
+  function fmtPlays(n) {
+    if (n <= 1) return 'Watched';
+    if (n === 2) return 'Watched twice';
+    return `Watched ${n}\u00d7`;
+  }
+
+  // One request for the whole "finished it" transition: drop the resume point,
+  // flag it watched, and bump the counter (the server owns the increment).
+  async function recordCompletion(v) {
+    const res = await fetch('/api/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source: v.source, progress: null, watched: true, played: true }),
+    });
+    state[v.source] = await res.json();
+    renderLibrary();
+  }
+
+  // Clearing the flag and the tally must travel together: two separate posts
+  // race on read-modify-write of state.json and one silently undoes the other.
+  async function recordUnwatch(v) {
+    const res = await fetch('/api/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source: v.source, watched: false, resetPlays: true }),
+    });
+    state[v.source] = await res.json();
+    renderLibrary();
+  }
 
   // ── queue helpers ─────────────────────────────────────
   // The server owns the persisted queue; PUT replaces it wholesale, which
@@ -1481,9 +1573,14 @@ HTML = """<!DOCTYPE html>
         ? `<div class="card-progress"><div class="card-progress-fill" style="width:${pct}%"></div></div>`
         : '<div class="card-progress"></div>';
 
-      const badge  = watched ? `<div class="card-watched-badge">&#10003;</div>` : '';
+      const plays  = playCount(v);
+      const badge  = watched
+        ? (plays > 1
+            ? `<div class="card-watched-badge card-play-count" title="${fmtPlays(plays)}">${plays}\u00d7</div>`
+            : `<div class="card-watched-badge">&#10003;</div>`)
+        : '';
       const footer = watched
-        ? `<div class="card-watched-label">&#10003; Watched</div>`
+        ? `<div class="card-watched-label">&#10003; ${fmtPlays(plays)}</div>`
         : remaining && remaining > 10
           ? `<div class="card-remaining">${fmtDuration(remaining)} remaining</div>`
           : '';
@@ -1521,7 +1618,14 @@ HTML = """<!DOCTYPE html>
       + '</button>';
   }
 
+  function renderSlideshowMeta() {
+    const plays = playCount(currentVideo);
+    document.getElementById('slideshow-meta').textContent =
+      plays > 0 ? `\u2713 ${fmtPlays(plays)}` : '';
+  }
+
   function renderPlayButtons() {
+    renderSlideshowMeta();
     const saved   = loadProgress(currentVideo);
     const watched = isWatched(currentVideo);
     const row     = document.querySelector('.slide-play-row');
@@ -1546,8 +1650,9 @@ HTML = """<!DOCTYPE html>
     }
   }
 
-  function unmarkWatched() {
-    clearWatched(currentVideo);
+  // Unmarking means "treat this as never watched", so the tally goes with it.
+  async function unmarkWatched() {
+    await recordUnwatch(currentVideo);
     renderPlayButtons();
   }
 
@@ -1642,9 +1747,7 @@ HTML = """<!DOCTYPE html>
     vid.onplay = () => { if (upNextTimer) cancelUpNext(); };
 
     vid.onended = () => {
-      clearProgress(v);
-      markWatched(v);
-      renderLibrary();
+      recordCompletion(v);
       const next = pickNext(v);
       if (next) showUpNext(next);
     };
@@ -1769,7 +1872,12 @@ def show_seasons(series_key):
     
     series = shows[series_key]
     seasons_data = [
-        {"name": season_data["name"], "key": season_key, "url": f"/shows/{series_key}/{season_key}"}
+        {
+            "name": season_data["name"],
+            "key": season_key,
+            "url": f"/shows/{series_key}/{season_key}",
+            "poster": season_data.get("poster"),
+        }
         for season_key, season_data in series.get("seasons", {}).items()
     ]
     
@@ -1922,6 +2030,7 @@ def api_post_state():
         abort(400)
     state = load_state()
     entry = state.setdefault(source, {})
+    was_watched = bool(entry.get("watched"))
     if "progress" in body:
         if body["progress"] is None:
             entry.pop("progress", None)
@@ -1932,10 +2041,19 @@ def api_post_state():
             entry["watched"] = True
         else:
             entry.pop("watched", None)
+    if body.get("played"):
+        # Incremented server-side so a stale client copy cannot clobber the tally.
+        # Entries watched before this field existed count as one prior play.
+        current = entry.get("plays")
+        if current is None:
+            current = 1 if was_watched else 0
+        entry["plays"] = current + 1
+    if body.get("resetPlays"):
+        entry.pop("plays", None)
     if not entry:
         state.pop(source, None)
     save_state(state)
-    return jsonify({"ok": True})
+    return jsonify(entry)
 
 
 def hydrate_queue(queue: list[str]) -> list[dict]:

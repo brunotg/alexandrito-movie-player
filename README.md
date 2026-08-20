@@ -126,6 +126,8 @@ python3 server.py --clear-cache
 - **Configuration persistence**: saves paths and catalogs to `library-config.json` for no-argument startup
 - **Fast startup**: uses cached catalog on subsequent runs (rescan with `--rescan`)
 - **Play queue**: build a watch list that spans shows and movies; plays through it automatically
+- **Watch counter**: counts how many times each video has been played to the end
+- **Season posters**: a poster image in a season folder illustrates that season in the picker
 
 **Routes:**
 - `GET /` — library home with TV shows and movies options
@@ -137,7 +139,9 @@ python3 server.py --clear-cache
 - `GET /movies/<series_key>/<movie_key>` — watch a specific movie
 - `GET /api/shows/<series_key>/<season_key>/videos` — JSON list of season videos
 - `GET /api/movies/<series_key>/<movie_key>/videos` — JSON list of movie videos
-- `GET /api/state` — get/post viewing progress for all videos
+- `GET /api/state` — get/post viewing progress, watched flags and play counts
+  - POST body: `{source, progress?, watched?, played?, resetPlays?}`; `played: true`
+    increments the counter server-side and the updated entry is returned
 - `GET /api/queue` — the play queue as full video objects (dead entries pruned)
 - `PUT /api/queue` — replace the queue; body `{"sources": [path, ...]}`
 - `GET /media?path=<absolute_path>` — serves video files and stills (403 if outside allowed dirs)
@@ -170,7 +174,8 @@ python3 server.py --clear-cache
 Automatically created by `--save-config`. Contains paths and cached catalog data for fast startup.
 
 **Runtime state files** (created automatically, not part of configuration):
-- `state.json` — per-video watch progress and watched flags, keyed by absolute path
+- `state.json` — per-video progress, watched flag and play count, keyed by absolute path
+  (e.g. `{"/path/ep.mkv": {"watched": true, "plays": 3}}`)
 - `queue.json` — the play queue, stored as an ordered list of absolute source paths
 
 **Dependencies:** `flask`
@@ -190,6 +195,37 @@ Library (grid of episode cards)
 - **Library:** shows `still_01.jpg` (the title card) for each episode
 - **Slideshow:** shows the 5 grid composites (not individual stills) with slide-in animation
 - **Player:** native HTML5 `<video>` element, full controls
+
+### Season posters
+
+The season picker (`/shows/<series_key>`) shows each season's poster instead of a
+bare text card. A season is illustrated automatically when its folder contains an
+image whose filename includes `poster`:
+
+```
+Paw Patrol Season 1/
+├── paw_patrol_season_1_poster.webp   ← used as the season's artwork
+├── PAW.Patrol.S01E01....mp4
+└── ...
+```
+
+- Recognised extensions: `.webp`, `.jpg`, `.jpeg`, `.png`
+- Posters are letterboxed, not cropped, so mixed aspect ratios (2:3, 4:5) all sit on
+  a uniform card without losing any artwork
+- Seasons without a poster keep the plain text card, so this is purely additive
+- **Posters are picked up during a scan**, so run `python3 server.py --rescan` once
+  after adding them to an already-cached library
+
+### Watch counter
+
+Every time a video plays through to the end, its counter goes up by one.
+
+- **Library:** the corner badge shows `3\u00d7` once a video has been finished more than
+  once (a plain `\u2713` for a single viewing), and the card footer reads *Watched 3\u00d7*
+- **Slideshow:** the same tally appears under the episode title
+- **Reset:** *Mark as unwatched* clears the flag and the tally together
+- Videos finished before this feature existed have no stored count; they are treated
+  as having been watched once, so the next completion takes them to 2
 
 ### Queue playback
 
@@ -236,10 +272,29 @@ octonauts/s3/
 | Server port | 8080 | Port 5000 is occupied by AirPlay (AirTunes) on macOS |
 | File serving security | Path must start with `VIDEO_DIR.resolve()` | Prevents path traversal; app is local-only but still scoped |
 | Back navigation | Per-level (player → slideshow → library) | Preserves context instead of dropping user to library |
+| Season poster | Any image in the season folder with `poster` in its name | No naming convention to maintain per show, and no separate config to keep in sync with the files |
+| Poster fit | Letterboxed (`object-fit: contain`) | Posters come in 2:3 and 4:5; cropping to a single ratio would cut characters out of the artwork |
+| Watch count | Incremented server-side on `played: true` | A stale client copy of `state` cannot clobber the tally, and one request carries the whole "finished it" transition |
 | Queue storage | Ordered list of source paths in `queue.json` | Paths are the existing identity for a video (same key as `state.json`); titles stay fresh because the server rehydrates from the catalog |
 | Queue API | Single `PUT` that replaces the whole list | Covers append, remove, reorder and clear without four endpoints |
 | Auto-advance | 8s countdown with Play now / Cancel | Instant cuts are jarring, and a countdown gives a chance to stop after each episode |
 | Video event handlers | Assigned as `on*` properties, not `addEventListener` | The one `<video>` element is reused for every episode; listeners would otherwise stack up on each play |
+
+---
+
+## Tests
+
+```bash
+python3 -m pytest -q
+```
+
+- `test_server.py` — pure-function coverage: title parsing, state load/save, catalog
+  scanning, route/index building
+- `test_api.py` — endpoint coverage: season and movie catalogs, state, play counter,
+  queue, posters, media path scoping
+
+Tests redirect `state.json` and `queue.json` to a temp directory, so running them
+never touches your real watch history.
 
 ---
 

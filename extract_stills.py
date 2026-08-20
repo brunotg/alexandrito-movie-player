@@ -193,6 +193,7 @@ def main() -> None:
         "season": season,
         "source": str(args.video.resolve()),
         "duration": duration,
+        "stills": still_paths,
     }
     json_path = output_dir / "metadata.json"
     json_path.write_text(json.dumps(metadata, indent=2))
