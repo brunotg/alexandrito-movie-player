@@ -196,6 +196,21 @@ Library (grid of episode cards)
 - **Slideshow:** shows the 5 grid composites (not individual stills) with slide-in animation
 - **Player:** native HTML5 `<video>` element, full controls
 
+### Paged episode lists
+
+Seasons show **6 episodes per page** with a pager below the grid.
+
+- Prev / Next plus numbered buttons, and an "Episodes 7\u201312 of 47" caption
+- The pager hides itself when a season has 6 or fewer episodes, so short seasons
+  and movie pages look exactly as before
+- The current page is kept in the URL (`?page=4`), so a reload or a shared link
+  lands in the same place; an out-of-range or malformed value falls back safely
+- Left/Right arrow keys page the library (the same keys drive the slideshow when
+  a slideshow is open)
+- Paging is view-only: the season catalog is still fetched once and held as a
+  single list, so auto-advance walks straight across a page boundary and the page
+  follows the episode being played
+
 ### Season posters
 
 The season picker (`/shows/<series_key>`) shows each season's poster instead of a
@@ -272,6 +287,8 @@ octonauts/s3/
 | Server port | 8080 | Port 5000 is occupied by AirPlay (AirTunes) on macOS |
 | File serving security | Path must start with `VIDEO_DIR.resolve()` | Prevents path traversal; app is local-only but still scoped |
 | Back navigation | Per-level (player → slideshow → library) | Preserves context instead of dropping user to library |
+| Episode paging | Client-side slice of the already-loaded catalog | The queue, auto-advance and watch state all read the season as one continuous list; paging the data instead of the view would fragment all three |
+| Page size | 6, as a constant at the top of the player script | One place to change it; no config plumbing for a value that rarely moves |
 | Season poster | Any image in the season folder with `poster` in its name | No naming convention to maintain per show, and no separate config to keep in sync with the files |
 | Poster fit | Letterboxed (`object-fit: contain`) | Posters come in 2:3 and 4:5; cropping to a single ratio would cut characters out of the artwork |
 | Watch count | Incremented server-side on `played: true` | A stale client copy of `state` cannot clobber the tally, and one request carries the whole "finished it" transition |
