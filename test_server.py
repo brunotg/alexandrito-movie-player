@@ -11,23 +11,27 @@ from server import _parse_title, load_all_metadata, load_state, save_state
 from extract_stills import parse_episode
 
 
+# These are module-level containers that server.py mutates in place
+# (build_route_map clears and repopulates them), so they are snapshotted and
+# restored by content rather than by rebinding the name.
+CATALOG_GLOBALS = ("LIBRARY_CATALOG", "ROUTE_MAP", "VIDEO_INDEX")
+
+
 @pytest.fixture(autouse=True)
 def reset_catalogs():
-    """Reset catalogs to empty state before and after each test."""
+    """Empty the catalog globals before each test and restore them after."""
     import server
-    original_video = server.VIDEO_CATALOG
-    original_s03 = server.ABOVE_BEYOND_S03_CATALOG
-    original_s04 = server.ABOVE_BEYOND_S04_CATALOG
-    
-    server.VIDEO_CATALOG = []
-    server.ABOVE_BEYOND_S03_CATALOG = []
-    server.ABOVE_BEYOND_S04_CATALOG = []
-    
+
+    originals = {name: dict(getattr(server, name)) for name in CATALOG_GLOBALS}
+    for name in CATALOG_GLOBALS:
+        getattr(server, name).clear()
+
     yield
-    
-    server.VIDEO_CATALOG = original_video
-    server.ABOVE_BEYOND_S03_CATALOG = original_s03
-    server.ABOVE_BEYOND_S04_CATALOG = original_s04
+
+    for name, original in originals.items():
+        container = getattr(server, name)
+        container.clear()
+        container.update(original)
 
 
 class TestParseTitle:
@@ -258,19 +262,49 @@ class TestLoadAllMetadata:
 class TestCachingBehavior:
     """Tests to verify caching implementation works correctly."""
 
-    def test_video_catalog_initialized_empty(self):
-        """VIDEO_CATALOG should be initialized as empty list."""
+    def test_library_catalog_initialized_empty(self):
+        """LIBRARY_CATALOG should be empty once the fixture has reset it."""
         import server
-        assert isinstance(server.VIDEO_CATALOG, list)
-        assert server.VIDEO_CATALOG == []
+        assert isinstance(server.LIBRARY_CATALOG, dict)
+        assert server.LIBRARY_CATALOG == {}
 
-    def test_above_beyond_catalogs_initialized_empty(self):
-        """Above & Beyond catalogs should be initialized as empty lists."""
+    def test_route_map_and_video_index_initialized_empty(self):
+        """The route map and video index should start empty too."""
         import server
-        assert isinstance(server.ABOVE_BEYOND_S03_CATALOG, list)
-        assert isinstance(server.ABOVE_BEYOND_S04_CATALOG, list)
-        assert server.ABOVE_BEYOND_S03_CATALOG == []
-        assert server.ABOVE_BEYOND_S04_CATALOG == []
+        assert isinstance(server.ROUTE_MAP, dict)
+        assert isinstance(server.VIDEO_INDEX, dict)
+        assert server.ROUTE_MAP == {}
+        assert server.VIDEO_INDEX == {}
+
+    def test_build_route_map_populates_index_from_catalog(self):
+        """build_route_map() should derive routes and the video index together."""
+        import server
+        with tempfile.TemporaryDirectory() as tmp:
+            season_dir = Path(tmp) / "Season 1"
+            season_dir.mkdir()
+            server.LIBRARY_CATALOG["shows"] = {
+                "paw-patrol": {
+                    "name": "Paw Patrol",
+                    "path": Path(tmp),
+                    "seasons": {
+                        "season-1": {
+                            "name": "Season 1",
+                            "path": season_dir,
+                            "catalog": [
+                                {"title": "Ep 1", "source": "/x/ep1.mp4", "grids": []}
+                            ],
+                        }
+                    },
+                }
+            }
+            server.build_route_map()
+
+            assert len(server.ROUTE_MAP) == 1
+            assert "/x/ep1.mp4" in server.VIDEO_INDEX
+            entry = server.VIDEO_INDEX["/x/ep1.mp4"]
+            assert entry["title"] == "Ep 1"
+            assert entry["collection"] == "Paw Patrol \u00b7 Season 1"
+            assert entry["route_path"] == "shows/paw-patrol/season-1"
 
 
 if __name__ == "__main__":
