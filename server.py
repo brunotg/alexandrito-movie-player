@@ -957,6 +957,56 @@ HTML = """<!DOCTYPE html>
       letter-spacing: 0;
     }
 
+    /* ── Pager ────────────────────────────────────────── */
+    #pager {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 4px 28px 34px;
+    }
+    #pager.visible { display: flex; }
+    .pager-btn {
+      background: #1a4a6e;
+      border: none;
+      color: #a0d8f0;
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.15s;
+    }
+    .pager-btn:hover:not(:disabled) { background: #255f8a; }
+    .pager-btn:disabled { opacity: 0.25; cursor: default; }
+    .pager-num {
+      background: #0d2240;
+      border: 1px solid #1a3a5c;
+      color: #7a9ebb;
+      min-width: 38px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .pager-num:hover { background: #163454; color: #cfe8f8; }
+    .pager-num.current {
+      background: #1278c4;
+      border-color: #1278c4;
+      color: #fff;
+      font-weight: bold;
+      cursor: default;
+    }
+    #pager-caption {
+      width: 100%;
+      text-align: center;
+      color: #4a8fb8;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
     /* ── Slideshow ────────────────────────────────────── */
     #slideshow {
       display: none;
@@ -1337,6 +1387,12 @@ HTML = """<!DOCTYPE html>
 
 <div id="loading">Loading library&hellip;</div>
 <div id="library"   style="display:none;"></div>
+<div id="pager">
+  <div id="pager-caption"></div>
+  <button class="pager-btn" id="pager-prev" onclick="goToPage(page - 1)">&#8592; Prev</button>
+  <span id="pager-nums"></span>
+  <button class="pager-btn" id="pager-next" onclick="goToPage(page + 1)">Next &#8594;</button>
+</div>
 
 <div id="slideshow">
   <div id="slideshow-title"></div>
@@ -1380,6 +1436,8 @@ HTML = """<!DOCTYPE html>
   let lastSave = 0;        // last progress checkpoint for the video now playing
 
   const UP_NEXT_SECONDS = 8;
+  const PAGE_SIZE = 6;
+  let page = 0;            // zero-based index of the library page on screen
 
   // ── helpers ──────────────────────────────────────────
   function escHtml(s) {
@@ -1390,6 +1448,16 @@ HTML = """<!DOCTYPE html>
   }
   function hide(id) {
     document.getElementById(id).style.display = 'none';
+  }
+
+  // The pager lives outside #library, so it has to follow it in and out of view.
+  function showLibrary() {
+    document.getElementById('library').style.display = 'grid';
+    renderPager();
+  }
+  function hideLibrary() {
+    document.getElementById('library').style.display = 'none';
+    document.getElementById('pager').classList.remove('visible');
   }
 
   // ── server state helpers ──────────────────────────────
@@ -1546,10 +1614,11 @@ HTML = """<!DOCTYPE html>
     videos = await videosRes.json();
     state  = await stateRes.json();
     queue  = await queueRes.json();
+    page   = readPageFromUrl();
     renderQueue();
     renderLibrary();
     hide('loading');
-    show('library', 'grid');
+    showLibrary();
   }
 
   // ── library ──────────────────────────────────────────
@@ -1562,8 +1631,76 @@ HTML = """<!DOCTYPE html>
       : `${m}m ${String(s).padStart(2,'0')}s`;
   }
 
+  function pageCount() {
+    return Math.max(1, Math.ceil(videos.length / PAGE_SIZE));
+  }
+
+  function clampPage(n) {
+    return Math.min(Math.max(0, n), pageCount() - 1);
+  }
+
+  function goToPage(n) {
+    page = clampPage(n);
+    syncPageToUrl();
+    renderLibrary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Keep the page in the URL so a reload or a shared link lands in the same place.
+  function syncPageToUrl() {
+    const url = new URL(window.location);
+    if (page === 0) url.searchParams.delete('page');
+    else            url.searchParams.set('page', page + 1);
+    history.replaceState(null, '', url);
+  }
+
+  function readPageFromUrl() {
+    const raw = new URLSearchParams(window.location.search).get('page');
+    const n = parseInt(raw, 10);
+    return Number.isFinite(n) ? clampPage(n - 1) : 0;
+  }
+
+  // Show the page a given video sits on, so returning from the player after an
+  // auto-advance does not dump you back on page 1.
+  function pageOf(index) {
+    return clampPage(Math.floor(index / PAGE_SIZE));
+  }
+
+  function renderPager() {
+    const pager = document.getElementById('pager');
+    const total = pageCount();
+
+    // Nothing to page through: a short season, or a movie page with one video.
+    if (videos.length <= PAGE_SIZE) {
+      pager.classList.remove('visible');
+      return;
+    }
+    pager.classList.add('visible');
+
+    const first = page * PAGE_SIZE + 1;
+    const last  = Math.min(videos.length, (page + 1) * PAGE_SIZE);
+    document.getElementById('pager-caption').textContent =
+      `Episodes ${first}\u2013${last} of ${videos.length}`;
+
+    document.getElementById('pager-prev').disabled = page === 0;
+    document.getElementById('pager-next').disabled = page === total - 1;
+
+    let nums = '';
+    for (let n = 0; n < total; n++) {
+      nums += `<button class="pager-num ${n === page ? 'current' : ''}" onclick="goToPage(${n})">${n + 1}</button>`;
+    }
+    document.getElementById('pager-nums').innerHTML = nums;
+  }
+
   function renderLibrary() {
-    document.getElementById('library').innerHTML = videos.map((v, i) => {
+    page = clampPage(page);
+    const start = page * PAGE_SIZE;
+    // The slice is only what is drawn; `i` stays the index into `videos` so
+    // card clicks and queue toggles keep addressing the right episode.
+    document.getElementById('library').innerHTML = videos
+      .slice(start, start + PAGE_SIZE)
+      .map((v, j) => {
+      const i = start + j;
       const watched   = isWatched(v);
       const saved     = loadProgress(v);
       const pct       = v.duration && saved ? Math.min(100, (saved / v.duration) * 100) : 0;
@@ -1608,6 +1745,7 @@ HTML = """<!DOCTYPE html>
         </div>
       `;
     }).join('');
+    renderPager();
   }
 
   // ── slideshow ─────────────────────────────────────────
@@ -1666,7 +1804,7 @@ HTML = """<!DOCTYPE html>
     document.getElementById('slideshow-title').textContent = currentVideo.title;
     setSlide(null);
     renderPlayButtons();
-    hide('library');
+    hideLibrary();
     show('slideshow', 'flex');
     show('back-btn');
     view = 'slideshow';
@@ -1706,6 +1844,9 @@ HTML = """<!DOCTYPE html>
     if (view === 'slideshow') {
       if (e.key === 'ArrowLeft')  prevSlide();
       if (e.key === 'ArrowRight') nextSlide();
+    } else if (view === 'library') {
+      if (e.key === 'ArrowLeft')  goToPage(page - 1);
+      if (e.key === 'ArrowRight') goToPage(page + 1);
     }
   });
 
@@ -1720,6 +1861,10 @@ HTML = """<!DOCTYPE html>
   function playVideo(v, fromBeginning = false) {
     cancelUpNext();
     currentVideo = v;
+    // Auto-advance can carry us onto a video from a later page (or another
+    // collection); follow it so going back shows where we actually are.
+    const idx = videos.findIndex(x => x.source === v.source);
+    if (idx >= 0) page = pageOf(idx);
     slideIndex = 0;
     document.getElementById('slideshow-title').textContent = v.title;
     document.getElementById('player-title').textContent = v.title;
@@ -1753,7 +1898,7 @@ HTML = """<!DOCTYPE html>
     };
 
     hide('slideshow');
-    hide('library');
+    hideLibrary();
     show('back-btn');
     show('player');
     view = 'player';
@@ -1817,7 +1962,7 @@ HTML = """<!DOCTYPE html>
       // return to, so fall through to the library instead.
       if (!currentVideo.grids || currentVideo.grids.length === 0) {
         renderLibrary();
-        show('library', 'grid');
+        showLibrary();
         hide('back-btn');
         view = 'library';
         return;
@@ -1830,7 +1975,7 @@ HTML = """<!DOCTYPE html>
     } else if (view === 'slideshow') {
       hide('slideshow');
       renderLibrary();
-      show('library', 'grid');
+      showLibrary();
       hide('back-btn');
       view = 'library';
     }
