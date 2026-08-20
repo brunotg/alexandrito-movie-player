@@ -669,7 +669,8 @@
                   "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/PAW.Patrol.S01E47.Pups.Save.the.Turbots.720p_stills/grid_05.jpg"
                 ]
               }
-            ]
+            ],
+            "poster": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 1/paw_patrol_season_1_poster.webp"
           },
           "paw-patrol-season-4": {
             "name": "Paw Patrol Season 4",
@@ -1333,7 +1334,8 @@
                   "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/Paw.Patrol.S04E15.Pups.Save.a.Ferris.Wheel.1080p.WEB-DL.AAC.2.0.H264_stills/grid_05.jpg"
                 ]
               }
-            ]
+            ],
+            "poster": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 4/paw_patrol_season_4_poster.webp"
           },
           "paw-patrol-season-5": {
             "name": "Paw Patrol Season 5",
@@ -1689,12 +1691,13 @@
                   "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/PAW.Patrol.S05E25.Ultimate.Rescue.Pups.Save.the.Tigers.1080p_stills/grid_05.jpg"
                 ]
               }
-            ]
+            ],
+            "poster": "/Volumes/Bruno's files/Alexandritos TV/Paw Patrol Season 5/paw_patrol_season_5_poster.webp"
           }
         }
       }
     },
     "movies": {}
   },
-  "cached_at": "2026-08-20T15:27:49.324538"
+  "cached_at": "2026-08-20T16:21:23.936328"
 }
