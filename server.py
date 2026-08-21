@@ -1432,6 +1432,7 @@ HTML = """<!DOCTYPE html>
   let state = {};          // { [source]: { progress?, watched? } }
   let queue = [];          // [{ title, source, grids, duration, collection }] - persisted server-side
   let upNext = null;       // video queued to auto-play once the current one ends
+  let playingFromQueue = false;  // did the video on screen come off the queue?
   let upNextTimer = null;
   let lastSave = 0;        // last progress checkpoint for the video now playing
 
@@ -1601,7 +1602,7 @@ HTML = """<!DOCTYPE html>
     const next = queue.shift();
     saveQueue();
     document.getElementById('queue-panel').classList.remove('open');
-    playVideo(next, true);
+    playVideo(next, true, true);
   }
 
   // ── load ─────────────────────────────────────────────
@@ -1858,8 +1859,9 @@ HTML = """<!DOCTYPE html>
   // Handlers are assigned as properties rather than added as listeners: the
   // same <video> element is reused for every episode, so addEventListener
   // would stack a fresh copy of each handler on every play.
-  function playVideo(v, fromBeginning = false) {
+  function playVideo(v, fromBeginning = false, fromQueue = false) {
     cancelUpNext();
+    playingFromQueue = fromQueue;
     currentVideo = v;
     // Auto-advance can carry us onto a video from a later page (or another
     // collection); follow it so going back shows where we actually are.
@@ -1908,6 +1910,9 @@ HTML = """<!DOCTYPE html>
   // next episode in the collection being browsed.
   function pickNext(v) {
     if (queue.length > 0) return queue[0];
+    // The queue just ran dry. It is a finite playlist, so stop here rather than
+    // drifting on into the rest of the season.
+    if (playingFromQueue) return null;
     const i = videos.findIndex(x => x.source === v.source);
     if (i >= 0 && i + 1 < videos.length) return videos[i + 1];
     return null;
@@ -1934,11 +1939,12 @@ HTML = """<!DOCTYPE html>
     cancelUpNext();
     if (!next) return;
     // If it came off the queue, consume it before playing.
-    if (queue.length > 0 && queue[0].source === next.source) {
+    const cameFromQueue = queue.length > 0 && queue[0].source === next.source;
+    if (cameFromQueue) {
       queue.shift();
       saveQueue();
     }
-    playVideo(next, true);
+    playVideo(next, true, cameFromQueue);
   }
 
   function cancelUpNext() {

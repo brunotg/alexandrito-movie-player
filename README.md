@@ -251,9 +251,11 @@ movies can sit in the same list.
 - **Manage:** the **Queue** button in the header opens a drawer to reorder (▲▼),
   remove (✗), clear, or start playing the queue
 - **Auto-advance:** when a video ends, an *Up next* card appears over the player with
-  an 8-second countdown, plus **Play now** and **Cancel**. The queue is consumed
-  first; when it is empty, the next episode in the current collection plays instead.
-  If neither exists, playback simply stops.
+  an 8-second countdown, plus **Play now** and **Cancel**.
+- **The queue ends where you built it.** Once the last queued video finishes,
+  playback stops rather than continuing into the rest of the season \u2014 a queue is a
+  finite playlist, not a jumping-off point. Auto-advance to the next episode in the
+  collection still happens when you started a video normally and the queue is empty.
 - **Persistence:** the queue lives in `queue.json` and survives reloads, navigation
   between collections, and server restarts. Entries whose media no longer exists are
   dropped on the next startup.
@@ -294,6 +296,7 @@ octonauts/s3/
 | Watch count | Incremented server-side on `played: true` | A stale client copy of `state` cannot clobber the tally, and one request carries the whole "finished it" transition |
 | Queue storage | Ordered list of source paths in `queue.json` | Paths are the existing identity for a video (same key as `state.json`); titles stay fresh because the server rehydrates from the catalog |
 | Queue API | Single `PUT` that replaces the whole list | Covers append, remove, reorder and clear without four endpoints |
+| Queue exhaustion | Stop, do not fall through to the season | The queue is an explicit finite playlist; drifting into unqueued episodes after it ends is surprising, especially unattended |
 | Auto-advance | 8s countdown with Play now / Cancel | Instant cuts are jarring, and a countdown gives a chance to stop after each episode |
 | Video event handlers | Assigned as `on*` properties, not `addEventListener` | The one `<video>` element is reused for every episode; listeners would otherwise stack up on each play |
 
