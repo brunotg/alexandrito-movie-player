@@ -111,6 +111,7 @@ python3 server.py --clear-cache
 ```
 
 **Arguments:**
+- `--dev` — serve with Flask's development server (auto-reload + debugger) instead of waitress
 - `--shows <dir>` — directory containing TV shows organized as `Shows/<SeriesName>/<SeasonName>/episodes`
 - `--movies <dir>` — directory containing movies organized as `Movies/<SeriesName>/<MovieName>/files`
 - `--save-config` — save current `--shows` and `--movies` paths to `library-config.json` for future runs
@@ -178,7 +179,17 @@ Automatically created by `--save-config`. Contains paths and cached catalog data
   (e.g. `{"/path/ep.mkv": {"watched": true, "plays": 3}}`)
 - `queue.json` — the play queue, stored as an ordered list of absolute source paths
 
-**Dependencies:** `flask`
+**Serving:** requests are served by [waitress](https://pypi.org/project/waitress/), a
+production WSGI server, rather than Flask's development server. Streaming video is this
+app's main job and it is the workload the dev server handles worst: it closes the
+connection after every response, so each of a video player's many range requests pays a
+fresh TCP handshake and restarts congestion control — noticeable over a weak Wi-Fi link.
+waitress keeps connections alive and serves each request on one of 16 threads.
+
+Use `--dev` when working on the app itself, to get auto-reload and the interactive
+debugger back.
+
+**Dependencies:** `flask`, `waitress`
 
 ---
 
@@ -287,6 +298,7 @@ octonauts/s3/
 | Slideshow images | 5 grid composites (not 20 individual stills) | Faster to browse; each grid shows 4 frames at a glance |
 | Grid cell size | 640×360 per cell → 1280×720 composite | Matches native 16:9, reasonable file size |
 | Server port | 8080 | Port 5000 is occupied by AirPlay (AirTunes) on macOS |
+| WSGI server | waitress, with `--dev` for Flask's dev server | The dev server sends `Connection: close`, so every range request from a video player reopens a TCP connection and restarts slow-start; waitress keeps them alive |
 | File serving security | Path must start with `VIDEO_DIR.resolve()` | Prevents path traversal; app is local-only but still scoped |
 | Back navigation | Per-level (player → slideshow → library) | Preserves context instead of dropping user to library |
 | Episode paging | Client-side slice of the already-loaded catalog | The queue, auto-advance and watch state all read the season as one continuous list; paging the data instead of the view would fragment all three |
@@ -322,5 +334,5 @@ never touches your real watch history.
 
 ```bash
 brew install ffmpeg
-pip3 install pillow flask --break-system-packages
+pip3 install pillow flask waitress --break-system-packages
 ```

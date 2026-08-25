@@ -10,8 +10,13 @@ from pathlib import Path
 from datetime import datetime
 
 from flask import Flask, abort, jsonify, render_template_string, request, send_file
+from waitress import serve
 
 app = Flask(__name__)
+
+# A handful of devices, each holding a video connection open and issuing range
+# requests as it buffers and seeks. Threads are cheap here and mostly idle on I/O.
+WAITRESS_THREADS = 16
 
 # Configuration for library structure
 # Directory structure: Shows/<SeriesName>/<SeasonName>/episodes or Movies/<SeriesName>/<MovieName>/files
@@ -2292,6 +2297,12 @@ def main() -> None:
         help="Clear the cached catalog from disk",
     )
     parser.add_argument("--port", type=int, default=8080)
+    parser.add_argument(
+        "--dev",
+        action="store_true",
+        help="Serve with Flask's development server (auto-reload and debugger) "
+             "instead of waitress",
+    )
     args = parser.parse_args()
 
     global SHOWS_DIR, MOVIES_DIR, LIBRARY_CATALOG
@@ -2388,7 +2399,20 @@ def main() -> None:
             print(f"Or clear cache with: python3 server.py --clear-cache")
     
     print(f"Open http://localhost:{args.port}")
-    app.run(host="0.0.0.0", port=args.port, debug=False)
+
+    if args.dev:
+        # Auto-reload and the interactive debugger, for working on the app.
+        print("Serving with Flask's development server (--dev)")
+        app.run(host="0.0.0.0", port=args.port, debug=True)
+        return
+
+    # Streaming video to other devices is this app's main job, and it is the
+    # workload the development server handles worst: it closes the connection
+    # after every response, so each of a player's many range requests pays a
+    # fresh TCP handshake and restarts congestion control. waitress keeps
+    # connections alive and serves each request on a thread.
+    print(f"Serving with waitress ({WAITRESS_THREADS} threads)")
+    serve(app, host="0.0.0.0", port=args.port, threads=WAITRESS_THREADS)
 
 
 if __name__ == "__main__":
